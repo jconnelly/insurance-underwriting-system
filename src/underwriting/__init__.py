@@ -19,7 +19,10 @@ from .core.models import (
     RiskScore,
 )
 from .core.engine import UnderwritingEngine
+from .core.ai_engine import AIEnhancedUnderwritingEngine, EnhancedUnderwritingDecision
 from .config.loader import ConfigurationLoader
+from .ai.base import AIServiceInterface, AIUnderwritingDecision, AIRiskAssessment
+from .ai.openai_service import OpenAIService
 
 try:
     import sys
@@ -39,5 +42,11 @@ __all__ = [
     "UnderwritingDecision",
     "RiskScore",
     "UnderwritingEngine",
+    "AIEnhancedUnderwritingEngine",
+    "EnhancedUnderwritingDecision",
     "ConfigurationLoader",
+    "AIServiceInterface",
+    "AIUnderwritingDecision",
+    "AIRiskAssessment",
+    "OpenAIService",
 ]

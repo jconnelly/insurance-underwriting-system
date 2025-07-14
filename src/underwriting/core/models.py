@@ -26,6 +26,23 @@ class LicenseStatus(str, Enum):
     INVALID = "invalid"
 
 
+class Gender(str, Enum):
+    """Driver gender enumeration."""
+    MALE = "male"
+    FEMALE = "female"
+    OTHER = "other"
+    NOT_SPECIFIED = "not_specified"
+
+
+class MaritalStatus(str, Enum):
+    """Driver marital status enumeration."""
+    SINGLE = "single"
+    MARRIED = "married"
+    DIVORCED = "divorced"
+    WIDOWED = "widowed"
+    SEPARATED = "separated"
+
+
 class ViolationType(str, Enum):
     """Traffic violation types."""
     DUI = "DUI"
@@ -142,6 +159,7 @@ class Vehicle(BaseModel):
     usage: str = Field(default="personal")
     annual_mileage: Optional[conint(ge=0, le=100000)] = None
     anti_theft_device: bool = Field(default=False)
+    safety_rating: Optional[conint(ge=1, le=5)] = Field(default=3)
     
     @field_validator('vin')
     @classmethod
@@ -157,6 +175,8 @@ class Driver(BaseModel):
     first_name: constr(min_length=1, max_length=50)
     last_name: constr(min_length=1, max_length=50)
     date_of_birth: date
+    gender: Gender = Field(default=Gender.NOT_SPECIFIED)
+    marital_status: MaritalStatus = Field(default=MaritalStatus.SINGLE)
     license_number: constr(min_length=1, max_length=20)
     license_status: LicenseStatus
     license_state: constr(min_length=2, max_length=2)

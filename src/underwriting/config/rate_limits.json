@@ -1,0 +1,85 @@
+{
+  "rate_limits": {
+    "underwriting_evaluations": {
+      "enabled": true,
+      "daily_limit": 1000,
+      "weekly_limit": 5000,
+      "monthly_limit": 20000,
+      "burst_limit": 100,
+      "burst_window_minutes": 60,
+      "description": "Rate limits for underwriting evaluations"
+    },
+    "ai_evaluations": {
+      "enabled": true,
+      "daily_limit": 500,
+      "weekly_limit": 2000,
+      "monthly_limit": 8000,
+      "burst_limit": 50,
+      "burst_window_minutes": 60,
+      "description": "Rate limits for AI-powered evaluations"
+    },
+    "batch_processing": {
+      "enabled": true,
+      "daily_limit": 10,
+      "weekly_limit": 50,
+      "monthly_limit": 200,
+      "burst_limit": 5,
+      "burst_window_minutes": 60,
+      "max_batch_size": 100,
+      "description": "Rate limits for batch processing operations"
+    },
+    "cli_operations": {
+      "enabled": false,
+      "daily_limit": 10000,
+      "weekly_limit": 50000,
+      "monthly_limit": 200000,
+      "burst_limit": 1000,
+      "burst_window_minutes": 60,
+      "description": "Rate limits for CLI operations (disabled by default)"
+    },
+    "sample_generation": {
+      "enabled": true,
+      "daily_limit": 1000,
+      "weekly_limit": 5000,
+      "monthly_limit": 20000,
+      "burst_limit": 100,
+      "burst_window_minutes": 60,
+      "max_samples_per_request": 1000,
+      "description": "Rate limits for sample data generation"
+    }
+  },
+  "storage": {
+    "data_directory": "rate_limit_data",
+    "cleanup_interval_hours": 24,
+    "retention_days": 90,
+    "backup_enabled": true,
+    "backup_interval_hours": 12
+  },
+  "admin": {
+    "override_enabled": true,
+    "override_expiry_hours": 24,
+    "admin_daily_limit": 50000,
+    "admin_weekly_limit": 200000,
+    "admin_monthly_limit": 800000,
+    "emergency_override_enabled": true,
+    "require_justification": true
+  },
+  "analytics": {
+    "enabled": true,
+    "detailed_tracking": true,
+    "retention_days": 365,
+    "alerts": {
+      "usage_threshold_percent": 80,
+      "burst_threshold_percent": 90,
+      "consecutive_limit_hits": 5
+    }
+  },
+  "graceful_degradation": {
+    "enabled": true,
+    "fallback_to_rules_only": true,
+    "queue_requests_when_limited": false,
+    "queue_max_size": 100,
+    "queue_timeout_minutes": 30,
+    "retry_delay_seconds": 60
+  }
+}

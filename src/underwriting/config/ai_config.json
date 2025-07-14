@@ -1,0 +1,132 @@
+{
+  "ai_services": {
+    "openai": {
+      "enabled": true,
+      "api_key": "${OPENAI_API_KEY}",
+      "model": "gpt-4-turbo",
+      "max_tokens": 2000,
+      "temperature": 0.1,
+      "timeout": 30,
+      "retry_attempts": 3,
+      "retry_delay": 1.0,
+      "rate_limit": {
+        "requests_per_minute": 60,
+        "tokens_per_minute": 150000
+      }
+    },
+    "azure_openai": {
+      "enabled": false,
+      "api_key": "${AZURE_OPENAI_API_KEY}",
+      "endpoint": "${AZURE_OPENAI_ENDPOINT}",
+      "api_version": "2024-02-15-preview",
+      "deployment_name": "gpt-4-turbo",
+      "max_tokens": 2000,
+      "temperature": 0.1,
+      "timeout": 30,
+      "retry_attempts": 3,
+      "retry_delay": 1.0
+    },
+    "google": {
+      "enabled": false,
+      "api_key": "${GOOGLE_AI_API_KEY}",
+      "model": "gemini-pro",
+      "max_tokens": 2000,
+      "temperature": 0.1,
+      "timeout": 30,
+      "retry_attempts": 3,
+      "retry_delay": 1.0
+    },
+    "claude": {
+      "enabled": false,
+      "api_key": "${CLAUDE_API_KEY}",
+      "model": "claude-3-opus-20240229",
+      "max_tokens": 2000,
+      "temperature": 0.1,
+      "timeout": 30,
+      "retry_attempts": 3,
+      "retry_delay": 1.0
+    }
+  },
+  "ai_features": {
+    "risk_assessment": {
+      "enabled": true,
+      "weight": 0.3,
+      "description": "AI-powered risk scoring and assessment"
+    },
+    "decision_recommendation": {
+      "enabled": true,
+      "weight": 0.4,
+      "description": "AI decision recommendations"
+    },
+    "premium_adjustment": {
+      "enabled": true,
+      "weight": 0.2,
+      "description": "AI-suggested premium adjustments"
+    },
+    "risk_factor_identification": {
+      "enabled": true,
+      "weight": 0.1,
+      "description": "AI identification of key risk factors"
+    }
+  },
+  "decision_combination": {
+    "strategy": "weighted_average",
+    "ai_weight": 0.3,
+    "rules_weight": 0.7,
+    "confidence_threshold": 0.7,
+    "fallback_to_rules": true,
+    "require_consensus": false,
+    "override_rules": {
+      "high_confidence_threshold": 0.9,
+      "allow_ai_override": false
+    }
+  },
+  "prompt_settings": {
+    "include_rule_context": true,
+    "include_historical_data": true,
+    "include_market_context": false,
+    "custom_instructions": {
+      "conservative": "Apply strict risk assessment criteria with emphasis on loss prevention",
+      "standard": "Balance risk and profitability using standard industry practices",
+      "liberal": "Focus on market expansion while maintaining acceptable risk levels"
+    }
+  },
+  "logging": {
+    "log_ai_requests": true,
+    "log_ai_responses": true,
+    "log_performance_metrics": true,
+    "log_level": "INFO"
+  },
+  "performance": {
+    "cache_responses": true,
+    "cache_duration_minutes": 60,
+    "parallel_processing": true,
+    "max_concurrent_requests": 5
+  },
+  "safety": {
+    "response_validation": true,
+    "content_filtering": true,
+    "output_sanitization": true,
+    "max_response_length": 10000
+  },
+  "langsmith": {
+    "enabled": true,
+    "api_key": "${LANGSMITH_API_KEY}",
+    "api_url": "${LANGSMITH_ENDPOINT}",
+    "project_name": "insurance-underwriting",
+    "base_url": "https://smith.langchain.com",
+    "tracing": {
+      "trace_evaluations": true,
+      "trace_batch_processing": true,
+      "trace_ab_testing": true,
+      "include_inputs": true,
+      "include_outputs": true,
+      "include_metadata": true
+    },
+    "tags": {
+      "environment": "production",
+      "system": "underwriting",
+      "version": "2.0"
+    }
+  }
+}
