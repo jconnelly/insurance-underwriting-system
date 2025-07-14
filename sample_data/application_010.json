@@ -1,0 +1,118 @@
+{
+  "id": "829de953-007d-47f8-a32d-9ffb92748f93",
+  "application_date": "2025-07-14 09:12:08.172918",
+  "applicant": {
+    "id": "8523920b-1228-40ca-821c-b410a113b22d",
+    "first_name": "Paul",
+    "last_name": "Thompson",
+    "date_of_birth": "1952-12-22",
+    "license_number": "F65183860",
+    "license_status": "valid",
+    "license_state": "GA",
+    "license_issue_date": "1968-12-18",
+    "license_expiration_date": "2026-09-20",
+    "violations": [
+      {
+        "id": "e2c44512-0701-4810-a16e-221dce0a2b13",
+        "violation_type": "improper_turn",
+        "violation_date": "2023-05-06",
+        "description": "Improper Turn violation",
+        "severity": "minor",
+        "fine_amount": "598",
+        "points": 3,
+        "conviction_date": "2023-07-05"
+      },
+      {
+        "id": "80ee8e2c-c5a6-4667-88ff-bf5b3e81d256",
+        "violation_type": "speeding_10_under",
+        "violation_date": "2018-11-27",
+        "description": "Speeding 10 Under violation",
+        "severity": "minor",
+        "fine_amount": "173",
+        "points": 2,
+        "conviction_date": "2019-02-10"
+      }
+    ],
+    "claims": [
+      {
+        "id": "21d27ee5-e5a1-461c-b9d0-9068c8357eff",
+        "claim_type": "at_fault",
+        "claim_date": "2024-11-01",
+        "description": "At Fault claim",
+        "amount": "22960",
+        "at_fault": true,
+        "closed_date": "2025-02-26",
+        "settlement_amount": "18652.7780996983956880"
+      },
+      {
+        "id": "6d945f01-0f4d-4686-b098-2f4e5a548c9d",
+        "claim_type": "at_fault",
+        "claim_date": "2021-03-22",
+        "description": "At Fault claim",
+        "amount": "16842",
+        "at_fault": true,
+        "closed_date": "2021-05-11",
+        "settlement_amount": "13519.6711539028846518"
+      }
+    ],
+    "years_licensed": 56
+  },
+  "additional_drivers": [
+    {
+      "id": "84403ea4-258c-4606-9f7c-339af1905c59",
+      "first_name": "Anthony",
+      "last_name": "Miller",
+      "date_of_birth": "1964-06-19",
+      "license_number": "B83440474",
+      "license_status": "valid",
+      "license_state": "RI",
+      "license_issue_date": "1980-06-15",
+      "license_expiration_date": "2027-08-21",
+      "violations": [
+        {
+          "id": "5e3bccfb-78c5-49c5-add2-83d87cc96b26",
+          "violation_type": "improper_turn",
+          "violation_date": "2025-03-02",
+          "description": "Improper Turn violation",
+          "severity": "minor",
+          "fine_amount": "913",
+          "points": 2,
+          "conviction_date": "2025-05-13"
+        }
+      ],
+      "claims": [
+        {
+          "id": "b3bae922-9d8c-400e-a7b8-a34210589acc",
+          "claim_type": "at_fault",
+          "claim_date": "2018-10-03",
+          "description": "At Fault claim",
+          "amount": "5619",
+          "at_fault": true,
+          "closed_date": "2019-03-30",
+          "settlement_amount": "5129.6861351588533935"
+        }
+      ],
+      "years_licensed": 45
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "d0e23f08-d85c-4e6f-bd23-9ef7a84cf714",
+      "year": 2026,
+      "make": "Cadillac",
+      "model": "Model 7",
+      "vin": "RB9YRSPXUEXC95BLX",
+      "category": "luxury_sedan",
+      "value": "81112",
+      "usage": "personal",
+      "annual_mileage": 13540,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 680,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 1,
+  "previous_carrier": null,
+  "policy_limit": "500000",
+  "deductible": "2000"
+}

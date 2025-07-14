@@ -1,0 +1,2 @@
+[console_scripts]
+underwriting-cli = underwriting.cli.main:app

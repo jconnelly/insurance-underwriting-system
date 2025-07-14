@@ -1,0 +1,60 @@
+{
+  "id": "348e93e3-9ba5-4ba8-98d5-73510a56db58",
+  "application_date": "2025-07-14 09:12:08.170089",
+  "applicant": {
+    "id": "e8dda936-376e-4860-9cc0-68025ee81dbd",
+    "first_name": "Daniel",
+    "last_name": "Robinson",
+    "date_of_birth": "1965-09-07",
+    "license_number": "Z74476914",
+    "license_status": "valid",
+    "license_state": "HI",
+    "license_issue_date": "1981-09-03",
+    "license_expiration_date": "2026-06-20",
+    "violations": [
+      {
+        "id": "ee651613-038e-4741-ba23-3bee089f33d9",
+        "violation_type": "following_too_close",
+        "violation_date": "2020-05-06",
+        "description": "Following Too Close violation",
+        "severity": "moderate",
+        "fine_amount": "60",
+        "points": 6,
+        "conviction_date": "2020-06-27"
+      },
+      {
+        "id": "eb33f42f-886f-43c9-81bd-f71cf8de776f",
+        "violation_type": "improper_turn",
+        "violation_date": "2024-02-21",
+        "description": "Improper Turn violation",
+        "severity": "minor",
+        "fine_amount": "825",
+        "points": 2,
+        "conviction_date": "2024-05-04"
+      }
+    ],
+    "claims": [],
+    "years_licensed": 43
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "2e6bdd35-054f-44b1-b2db-4c4f7f1410bc",
+      "year": 2022,
+      "make": "Ford",
+      "model": "Mustang",
+      "vin": "BT29RA5FC808LLWH5",
+      "category": "luxury_suv",
+      "value": "75222",
+      "usage": "personal",
+      "annual_mileage": 8742,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 560,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 1,
+  "previous_carrier": "American Family",
+  "policy_limit": "500000",
+  "deductible": "1000"
+}

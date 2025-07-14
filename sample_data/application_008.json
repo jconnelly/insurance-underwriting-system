@@ -1,0 +1,96 @@
+{
+  "id": "ac89dd19-f4ae-4e8e-90dc-bb02b0dbab33",
+  "application_date": "2025-07-14 09:12:08.171194",
+  "applicant": {
+    "id": "1cf410f1-639e-472a-ad01-89b8dfd1375e",
+    "first_name": "Nancy",
+    "last_name": "Martinez",
+    "date_of_birth": "1970-07-14",
+    "license_number": "V78708644",
+    "license_status": "valid",
+    "license_state": "KY",
+    "license_issue_date": "1986-07-10",
+    "license_expiration_date": "2027-12-24",
+    "violations": [],
+    "claims": [
+      {
+        "id": "03ab10c0-657a-4874-8676-289e8a5cd8b2",
+        "claim_type": "comprehensive",
+        "claim_date": "2021-11-08",
+        "description": "Comprehensive claim",
+        "amount": "2231",
+        "at_fault": false,
+        "closed_date": "2022-01-18",
+        "settlement_amount": "2043.0198412106723347"
+      },
+      {
+        "id": "f42c91a1-c46e-494f-a87c-2f525a01dad2",
+        "claim_type": "property_damage",
+        "claim_date": "2024-11-23",
+        "description": "Property Damage claim",
+        "amount": "7681",
+        "at_fault": false,
+        "closed_date": "2025-04-26",
+        "settlement_amount": "6315.175557863522096"
+      }
+    ],
+    "years_licensed": 39
+  },
+  "additional_drivers": [
+    {
+      "id": "eedf14de-1a7f-46ae-9353-28e3984c0e59",
+      "first_name": "Linda",
+      "last_name": "Martin",
+      "date_of_birth": "2004-08-02",
+      "license_number": "R02931885",
+      "license_status": "valid",
+      "license_state": "NV",
+      "license_issue_date": "2020-07-29",
+      "license_expiration_date": "2027-10-01",
+      "violations": [
+        {
+          "id": "f4db8e95-ec58-4de3-958c-585a05c62ada",
+          "violation_type": "speeding_10_under",
+          "violation_date": "2019-06-19",
+          "description": "Speeding 10 Under violation",
+          "severity": "minor",
+          "fine_amount": "481",
+          "points": 2,
+          "conviction_date": "2019-08-15"
+        },
+        {
+          "id": "4aff28a3-b373-4389-a2a3-1cfacf769ad0",
+          "violation_type": "improper_turn",
+          "violation_date": "2021-10-04",
+          "description": "Improper Turn violation",
+          "severity": "minor",
+          "fine_amount": "712",
+          "points": 1,
+          "conviction_date": "2021-12-01"
+        }
+      ],
+      "claims": [],
+      "years_licensed": 4
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "0ec642df-4cca-47c0-af42-fb6dcfb5fd80",
+      "year": 2014,
+      "make": "Ford",
+      "model": "Explorer",
+      "vin": "GPV2RZDKS9JXWGVW1",
+      "category": "racing",
+      "value": "15821",
+      "usage": "personal",
+      "annual_mileage": 24697,
+      "anti_theft_device": false
+    }
+  ],
+  "credit_score": 641,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 1,
+  "previous_carrier": "Travelers",
+  "policy_limit": "1000000",
+  "deductible": "2000"
+}

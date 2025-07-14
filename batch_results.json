@@ -1,0 +1,66 @@
+[
+  {
+    "application_id": "7d87f6de-9c0a-4378-9960-9780b4570fd0",
+    "decision": "ADJUDICATE",
+    "reason": "Young driver with violations requiring review",
+    "risk_score": {
+      "overall_score": 350,
+      "risk_level": "MODERATE",
+      "driver_risk": 0,
+      "vehicle_risk": 150,
+      "history_risk": 50,
+      "credit_risk": 100,
+      "factors": [
+        "Triggered 1 rules"
+      ]
+    },
+    "rule_set": "1.0-conservative",
+    "triggered_rules": [
+      "ADJ003"
+    ],
+    "decision_date": "2025-07-14T08:54:26.975250"
+  },
+  {
+    "application_id": "63e209be-8d27-4fad-a756-1468504f37ef",
+    "decision": "ADJUDICATE",
+    "reason": "High-performance vehicle requiring review",
+    "risk_score": {
+      "overall_score": 150,
+      "risk_level": "LOW",
+      "driver_risk": 0,
+      "vehicle_risk": 0,
+      "history_risk": 0,
+      "credit_risk": 100,
+      "factors": [
+        "Triggered 1 rules"
+      ]
+    },
+    "rule_set": "1.0-conservative",
+    "triggered_rules": [
+      "ADJ004"
+    ],
+    "decision_date": "2025-07-14T08:54:26.975361"
+  },
+  {
+    "application_id": "e4af6ce8-5213-4be5-9e2c-fa07b35d602b",
+    "decision": "ADJUDICATE",
+    "reason": "Young driver with violations requiring review",
+    "risk_score": {
+      "overall_score": 600,
+      "risk_level": "MODERATE",
+      "driver_risk": 0,
+      "vehicle_risk": 0,
+      "history_risk": 450,
+      "credit_risk": 100,
+      "factors": [
+        "Poor driving history",
+        "Triggered 1 rules"
+      ]
+    },
+    "rule_set": "1.0-conservative",
+    "triggered_rules": [
+      "ADJ003"
+    ],
+    "decision_date": "2025-07-14T08:54:26.975494"
+  }
+]

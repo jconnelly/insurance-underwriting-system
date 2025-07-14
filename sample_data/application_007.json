@@ -1,0 +1,39 @@
+{
+  "id": "a0957724-0ec5-475a-8f88-cda8b1e72eb8",
+  "application_date": "2025-07-14 09:12:08.170606",
+  "applicant": {
+    "id": "d692a49c-ab1d-4ec0-aedf-8226d46c288e",
+    "first_name": "Susan",
+    "last_name": "Robinson",
+    "date_of_birth": "1974-09-29",
+    "license_number": "J47970046",
+    "license_status": "valid",
+    "license_state": "MO",
+    "license_issue_date": "1990-09-25",
+    "license_expiration_date": "2026-02-19",
+    "violations": [],
+    "claims": [],
+    "years_licensed": 34
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "d7f4b42a-b288-41e1-b11a-bcd99ea3c7c7",
+      "year": 2026,
+      "make": "Hyundai",
+      "model": "Model 5",
+      "vin": "7VE0WT1RLS2FNJFDF",
+      "category": "suv",
+      "value": "35772",
+      "usage": "personal",
+      "annual_mileage": 13724,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 529,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Travelers",
+  "policy_limit": "500000",
+  "deductible": "500"
+}

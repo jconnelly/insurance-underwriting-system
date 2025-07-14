@@ -1,0 +1,133 @@
+{
+  "id": "fff25d67-4781-4248-af8e-6111ee9fdae4",
+  "application_date": "2025-07-14 09:12:08.172028",
+  "applicant": {
+    "id": "d8284c5f-9622-4cef-8055-cbb295165eaa",
+    "first_name": "David",
+    "last_name": "Lee",
+    "date_of_birth": "1982-03-08",
+    "license_number": "H45998131",
+    "license_status": "valid",
+    "license_state": "ND",
+    "license_issue_date": "1998-03-04",
+    "license_expiration_date": "2026-08-31",
+    "violations": [
+      {
+        "id": "b5c0b237-6a2e-470a-bebf-6185bae2ec34",
+        "violation_type": "speeding_10_under",
+        "violation_date": "2018-10-13",
+        "description": "Speeding 10 Under violation",
+        "severity": "minor",
+        "fine_amount": "902",
+        "points": 3,
+        "conviction_date": "2018-11-14"
+      },
+      {
+        "id": "1618e9e2-00b9-46c6-977b-0f28d4296eb4",
+        "violation_type": "speeding_10_under",
+        "violation_date": "2020-10-29",
+        "description": "Speeding 10 Under violation",
+        "severity": "minor",
+        "fine_amount": "801",
+        "points": 2,
+        "conviction_date": "2020-12-29"
+      }
+    ],
+    "claims": [
+      {
+        "id": "80d575e0-69b8-4911-bef9-b5a3cc15059b",
+        "claim_type": "collision",
+        "claim_date": "2024-01-26",
+        "description": "Collision claim",
+        "amount": "9343",
+        "at_fault": true,
+        "closed_date": "2024-06-10",
+        "settlement_amount": "7922.4820319113189273"
+      }
+    ],
+    "years_licensed": 27
+  },
+  "additional_drivers": [
+    {
+      "id": "69d7e70a-f038-41f1-9681-c325c08a1a47",
+      "first_name": "Nancy",
+      "last_name": "Robinson",
+      "date_of_birth": "1965-09-20",
+      "license_number": "T97634134",
+      "license_status": "expired",
+      "license_state": "PA",
+      "license_issue_date": "1981-09-16",
+      "license_expiration_date": "2025-08-21",
+      "violations": [],
+      "claims": [
+        {
+          "id": "d23da18e-d180-400a-b872-f76b966cd593",
+          "claim_type": "property_damage",
+          "claim_date": "2024-02-05",
+          "description": "Property Damage claim",
+          "amount": "1580",
+          "at_fault": false,
+          "closed_date": "2024-05-15",
+          "settlement_amount": "1318.465462290576120"
+        }
+      ],
+      "years_licensed": 43
+    },
+    {
+      "id": "8960a212-727d-4502-87cc-eeb2c5baac67",
+      "first_name": "Sarah",
+      "last_name": "Ramirez",
+      "date_of_birth": "1994-01-20",
+      "license_number": "R68055326",
+      "license_status": "valid",
+      "license_state": "TN",
+      "license_issue_date": "2010-01-16",
+      "license_expiration_date": "2027-12-30",
+      "violations": [
+        {
+          "id": "be8e11c8-5081-4e1c-a597-32b06d01ab39",
+          "violation_type": "speeding_15_over",
+          "violation_date": "2023-08-20",
+          "description": "Speeding 15 Over violation",
+          "severity": "moderate",
+          "fine_amount": "780",
+          "points": 1,
+          "conviction_date": "2023-10-07"
+        }
+      ],
+      "claims": [
+        {
+          "id": "dc65f3ac-7de1-421a-a2aa-699283edb60a",
+          "claim_type": "property_damage",
+          "claim_date": "2025-03-19",
+          "description": "Property Damage claim",
+          "amount": "12672",
+          "at_fault": false,
+          "closed_date": "2025-06-26",
+          "settlement_amount": "10880.9381735852903424"
+        }
+      ],
+      "years_licensed": 15
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "d1665fcc-7cd6-4f5e-af54-66baa3efa13c",
+      "year": 2022,
+      "make": "Porsche",
+      "model": "Panamera",
+      "vin": "75KGDT5VCA86CT4AM",
+      "category": "suv",
+      "value": "19887",
+      "usage": "personal",
+      "annual_mileage": 13656,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 549,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Auto-Owners",
+  "policy_limit": "500000",
+  "deductible": "250"
+}

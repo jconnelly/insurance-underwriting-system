@@ -1,0 +1,50 @@
+{
+  "id": "07ac8e9e-de5e-485c-b1fb-5e0c123edde1",
+  "application_date": "2025-07-14 09:16:21.747426",
+  "applicant": {
+    "id": "f85ca8c4-0225-4594-81b5-0c269d65d256",
+    "first_name": "David",
+    "last_name": "Davis",
+    "date_of_birth": "1984-06-05",
+    "license_number": "S82380529",
+    "license_status": "valid",
+    "license_state": "IL",
+    "license_issue_date": "2000-06-01",
+    "license_expiration_date": "2025-12-16",
+    "violations": [],
+    "claims": [
+      {
+        "id": "3e1a78cf-fe53-425c-95d4-de4d0f65ccc7",
+        "claim_type": "comprehensive",
+        "claim_date": "2021-08-30",
+        "description": "Comprehensive claim",
+        "amount": "8582",
+        "at_fault": false,
+        "closed_date": "2021-10-16",
+        "settlement_amount": "7957.6555549297371264"
+      }
+    ],
+    "years_licensed": 25
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "604a2e30-eb06-435d-a7a2-2cb92276172a",
+      "year": 2026,
+      "make": "Dodge",
+      "model": "Model 2",
+      "vin": "6VGU18CNM7TP2SMSF",
+      "category": "sports_car",
+      "value": "77512",
+      "usage": "personal",
+      "annual_mileage": 5215,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 507,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Nationwide",
+  "policy_limit": "500000",
+  "deductible": "1000"
+}

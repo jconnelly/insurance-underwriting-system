@@ -1,0 +1,50 @@
+{
+  "id": "0079e9c1-f020-41c7-a983-ea8f94309aa9",
+  "application_date": "2025-07-14 09:12:08.169559",
+  "applicant": {
+    "id": "3671b1a4-94ec-4cf1-b9f0-d5fff92a4089",
+    "first_name": "Jessica",
+    "last_name": "Davis",
+    "date_of_birth": "2001-02-12",
+    "license_number": "V06739464",
+    "license_status": "valid",
+    "license_state": "NY",
+    "license_issue_date": "2017-02-08",
+    "license_expiration_date": "2027-12-25",
+    "violations": [],
+    "claims": [
+      {
+        "id": "6ab319d4-0ce5-42a2-bded-023f72b73562",
+        "claim_type": "comprehensive",
+        "claim_date": "2024-03-14",
+        "description": "Comprehensive claim",
+        "amount": "7928",
+        "at_fault": false,
+        "closed_date": "2024-06-30",
+        "settlement_amount": "7522.6495943113390016"
+      }
+    ],
+    "years_licensed": 8
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "40aff94e-224b-4ed3-a1d7-659867ef82df",
+      "year": 2016,
+      "make": "Ferrari",
+      "model": "Roma",
+      "vin": "GDPZ24PL8KTGT3N50",
+      "category": "convertible",
+      "value": "5959",
+      "usage": "personal",
+      "annual_mileage": 15345,
+      "anti_theft_device": true
+    }
+  ],
+  "credit_score": 691,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 1,
+  "previous_carrier": null,
+  "policy_limit": "500000",
+  "deductible": "250"
+}

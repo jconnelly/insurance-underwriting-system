@@ -1,0 +1,240 @@
+{
+  "underwriting_rules": {
+    "version": "1.0-liberal",
+    "last_updated": "2025-12-06",
+    "description": "Liberal automobile insurance underwriting rules - more accepting criteria for A/B testing",
+    
+    "hard_stops": {
+      "description": "Automatic declination criteria - immediate denial (LIBERAL)",
+      "rules": [
+        {
+          "rule_id": "HS001",
+          "name": "Invalid Driver License",
+          "description": "Driver license must be valid, unexpired, and not suspended/revoked",
+          "criteria": {
+            "license_status": ["suspended", "revoked", "expired", "invalid"],
+            "action": "deny",
+            "reason": "Invalid or suspended driver license"
+          }
+        },
+        {
+          "rule_id": "HS002", 
+          "name": "Major Violations - DUI",
+          "description": "Three or more DUI convictions (LIBERAL)",
+          "criteria": {
+            "violation_type": "DUI",
+            "count_threshold": 3,
+            "lookback_years": 3,
+            "action": "deny",
+            "reason": "Multiple DUI convictions"
+          }
+        },
+        {
+          "rule_id": "HS003",
+          "name": "Major Violations - Reckless Driving", 
+          "description": "Three or more reckless driving convictions (LIBERAL)",
+          "criteria": {
+            "violation_type": "reckless_driving",
+            "count_threshold": 3,
+            "lookback_years": 3,
+            "action": "deny", 
+            "reason": "Multiple reckless driving convictions"
+          }
+        },
+        {
+          "rule_id": "HS004",
+          "name": "Excessive Claims History",
+          "description": "Five or more at-fault claims (LIBERAL)",
+          "criteria": {
+            "claim_type": "at_fault",
+            "count_threshold": 5,
+            "lookback_years": 5,
+            "action": "deny",
+            "reason": "Excessive at-fault claims history"
+          }
+        },
+        {
+          "rule_id": "HS005",
+          "name": "Insurance Fraud History",
+          "description": "Previous insurance fraud convictions",
+          "criteria": {
+            "fraud_conviction": true,
+            "action": "deny",
+            "reason": "Insurance fraud history"
+          }
+        },
+        {
+          "rule_id": "HS006",
+          "name": "Extended Coverage Lapse",
+          "description": "Coverage lapse exceeding 180 days (LIBERAL)",
+          "criteria": {
+            "coverage_lapse_days": 180,
+            "action": "deny",
+            "reason": "Extended coverage lapse exceeding 180 days"
+          }
+        }
+      ]
+    },
+
+    "adjudication_triggers": {
+      "description": "Conditions requiring manual underwriter review (LIBERAL)",
+      "rules": [
+        {
+          "rule_id": "ADJ001",
+          "name": "Moderate Violation History",
+          "description": "Four or more minor violations (LIBERAL)",
+          "criteria": {
+            "minor_violations_count": 4,
+            "lookback_years": 3,
+            "action": "adjudicate",
+            "reason": "Multiple minor violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ002", 
+          "name": "Single Major Violation",
+          "description": "One major violation within recent period (LIBERAL)",
+          "criteria": {
+            "major_violation_count": 1,
+            "violation_types": ["DUI", "reckless_driving", "hit_and_run"],
+            "lookback_years": 2,
+            "action": "adjudicate",
+            "reason": "Recent major violation requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ003",
+          "name": "Multiple Claims History", 
+          "description": "Three or more at-fault claims (LIBERAL)",
+          "criteria": {
+            "at_fault_claims_count": 3,
+            "lookback_years": 5,
+            "action": "adjudicate",
+            "reason": "Multiple at-fault claims requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ004",
+          "name": "Young Driver High Risk",
+          "description": "Drivers under 21 with major violations (LIBERAL)",
+          "criteria": {
+            "driver_age_max": 20,
+            "major_violations": true,
+            "lookback_years": 3,
+            "action": "adjudicate", 
+            "reason": "Young driver with major violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ005",
+          "name": "Exotic Vehicle",
+          "description": "Supercars and racing vehicles only (LIBERAL)",
+          "criteria": {
+            "vehicle_category": ["supercar", "racing", "modified"],
+            "action": "adjudicate",
+            "reason": "Exotic vehicle requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ006",
+          "name": "Poor Credit Score",
+          "description": "Credit score below 450 (LIBERAL)",
+          "criteria": {
+            "credit_score_max": 450,
+            "action": "adjudicate",
+            "reason": "Poor credit score requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ007",
+          "name": "Extended Coverage Lapse",
+          "description": "Coverage lapse 90-179 days (LIBERAL)",
+          "criteria": {
+            "coverage_lapse_days_min": 90,
+            "coverage_lapse_days_max": 179,
+            "action": "adjudicate",
+            "reason": "Extended coverage lapse requiring review"
+          }
+        }
+      ]
+    },
+
+    "acceptance_criteria": {
+      "description": "Conditions for automatic acceptance (LIBERAL)",
+      "rules": [
+        {
+          "rule_id": "ACC001",
+          "name": "Clean Record Driver",
+          "description": "Drivers with clean records (LIBERAL)",
+          "criteria": {
+            "driver_age_min": 21,
+            "driver_age_max": 75,
+            "violations_count": 0,
+            "at_fault_claims_count": 0,
+            "lookback_years": 3,
+            "license_status": "valid",
+            "coverage_lapse_days_max": 30,
+            "action": "accept",
+            "reason": "Clean record driver"
+          }
+        },
+        {
+          "rule_id": "ACC002", 
+          "name": "Good Driver Minor Issues",
+          "description": "Good drivers with minimal issues (LIBERAL)",
+          "criteria": {
+            "driver_age_min": 25,
+            "minor_violations_max": 2,
+            "at_fault_claims_max": 1,
+            "lookback_years": 5,
+            "license_status": "valid",
+            "coverage_lapse_days_max": 60,
+            "action": "accept",
+            "reason": "Good driver with minimal issues"
+          }
+        },
+        {
+          "rule_id": "ACC003",
+          "name": "Experienced Driver",
+          "description": "Experienced drivers with moderate history (LIBERAL)",
+          "criteria": {
+            "driver_age_min": 35,
+            "minor_violations_max": 3,
+            "at_fault_claims_max": 2,
+            "lookback_years": 5,
+            "license_status": "valid",
+            "coverage_lapse_days_max": 89,
+            "credit_score_min": 500,
+            "action": "accept",
+            "reason": "Experienced driver with acceptable history"
+          }
+        }
+      ]
+    },
+
+    "evaluation_parameters": {
+      "lookback_periods": {
+        "violations": 3,
+        "claims": 5,
+        "license_issues": 3
+      },
+      "age_categories": {
+        "young_driver": {"min": 16, "max": 20},
+        "mature_driver": {"min": 21, "max": 75}, 
+        "senior_driver": {"min": 76, "max": 99}
+      },
+      "violation_severity": {
+        "major": ["DUI", "reckless_driving", "hit_and_run", "vehicular_homicide"],
+        "moderate": ["speeding_15_over", "improper_passing", "following_too_close"],
+        "minor": ["speeding_10_under", "improper_turn", "parking_violation"]
+      },
+      "vehicle_categories": {
+        "standard": ["sedan", "suv", "minivan", "pickup"],
+        "sports_car": ["sports_car", "convertible", "performance"],
+        "luxury": ["luxury_sedan", "luxury_suv"],
+        "high_performance": ["supercar", "racing", "modified"]
+      }
+    }
+  }
+}
+

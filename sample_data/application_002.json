@@ -1,0 +1,112 @@
+{
+  "id": "124cb7be-ba77-45dc-a87a-ab26f92a42f8",
+  "application_date": "2025-07-14 09:16:21.746590",
+  "applicant": {
+    "id": "e69a8f1e-47a3-43d0-a9e0-9e8432f7ebc7",
+    "first_name": "Donald",
+    "last_name": "Lewis",
+    "date_of_birth": "1944-12-27",
+    "license_number": "W21042786",
+    "license_status": "expired",
+    "license_state": "KY",
+    "license_issue_date": "1960-12-23",
+    "license_expiration_date": "2026-01-30",
+    "violations": [],
+    "claims": [],
+    "years_licensed": 64
+  },
+  "additional_drivers": [
+    {
+      "id": "7f0b708e-b943-47d5-a69a-34eb09af9442",
+      "first_name": "Jessica",
+      "last_name": "Johnson",
+      "date_of_birth": "1959-03-12",
+      "license_number": "S08589255",
+      "license_status": "valid",
+      "license_state": "KY",
+      "license_issue_date": "1975-03-08",
+      "license_expiration_date": "2027-04-04",
+      "violations": [],
+      "claims": [],
+      "years_licensed": 50
+    },
+    {
+      "id": "87eb8fe8-7a07-4867-9f92-5199951a65dd",
+      "first_name": "Robert",
+      "last_name": "Perez",
+      "date_of_birth": "1975-07-16",
+      "license_number": "O46750219",
+      "license_status": "valid",
+      "license_state": "WA",
+      "license_issue_date": "1991-07-12",
+      "license_expiration_date": "2028-07-06",
+      "violations": [
+        {
+          "id": "1c16ca24-6832-4f70-9f0a-45d02dbb5e1c",
+          "violation_type": "improper_turn",
+          "violation_date": "2022-10-11",
+          "description": "Improper Turn violation",
+          "severity": "minor",
+          "fine_amount": "252",
+          "points": 3,
+          "conviction_date": "2022-11-30"
+        }
+      ],
+      "claims": [
+        {
+          "id": "bb47d2ef-a935-4b60-8b08-267b930d301b",
+          "claim_type": "at_fault",
+          "claim_date": "2020-06-10",
+          "description": "At Fault claim",
+          "amount": "8895",
+          "at_fault": true,
+          "closed_date": "2020-10-08",
+          "settlement_amount": "8844.2530611326097675"
+        },
+        {
+          "id": "20496135-ec2b-4dc2-a6f8-412d8dd04674",
+          "claim_type": "at_fault",
+          "claim_date": "2022-05-19",
+          "description": "At Fault claim",
+          "amount": "23784",
+          "at_fault": true,
+          "closed_date": "2022-07-30",
+          "settlement_amount": "22244.5004841334422912"
+        }
+      ],
+      "years_licensed": 34
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "850a71cd-74c6-4582-9c91-4172add2d53f",
+      "year": 2019,
+      "make": "Hyundai",
+      "model": "Model 5",
+      "vin": "FBAZBEAXG0VTYY0XH",
+      "category": "modified",
+      "value": "15693",
+      "usage": "personal",
+      "annual_mileage": 20506,
+      "anti_theft_device": true
+    },
+    {
+      "id": "f98c0d6b-efe2-41b2-8fa4-6bbc01f93a68",
+      "year": 2026,
+      "make": "Acura",
+      "model": "Model 6",
+      "vin": "8K2SDXYFRTPMZ70XV",
+      "category": "pickup",
+      "value": "45035",
+      "usage": "personal",
+      "annual_mileage": 15641,
+      "anti_theft_device": false
+    }
+  ],
+  "credit_score": 623,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Nationwide",
+  "policy_limit": "250000",
+  "deductible": "500"
+}

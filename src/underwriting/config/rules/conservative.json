@@ -1,0 +1,239 @@
+{
+  "underwriting_rules": {
+    "version": "1.0-conservative",
+    "last_updated": "2025-12-06",
+    "description": "Conservative automobile insurance underwriting rules - stricter criteria for A/B testing",
+    
+    "hard_stops": {
+      "description": "Automatic declination criteria - immediate denial (CONSERVATIVE)",
+      "rules": [
+        {
+          "rule_id": "HS001",
+          "name": "Invalid Driver License",
+          "description": "Driver license must be valid, unexpired, and not suspended/revoked",
+          "criteria": {
+            "license_status": ["suspended", "revoked", "expired", "invalid"],
+            "action": "deny",
+            "reason": "Invalid or suspended driver license"
+          }
+        },
+        {
+          "rule_id": "HS002", 
+          "name": "Major Violations - DUI",
+          "description": "Single DUI conviction within lookback period (CONSERVATIVE)",
+          "criteria": {
+            "violation_type": "DUI",
+            "count_threshold": 1,
+            "lookback_years": 7,
+            "action": "deny",
+            "reason": "DUI conviction within 7 years"
+          }
+        },
+        {
+          "rule_id": "HS003",
+          "name": "Major Violations - Reckless Driving", 
+          "description": "Single reckless driving conviction (CONSERVATIVE)",
+          "criteria": {
+            "violation_type": "reckless_driving",
+            "count_threshold": 1,
+            "lookback_years": 5,
+            "action": "deny", 
+            "reason": "Reckless driving conviction within 5 years"
+          }
+        },
+        {
+          "rule_id": "HS004",
+          "name": "Excessive Claims History",
+          "description": "Two or more at-fault claims (CONSERVATIVE)",
+          "criteria": {
+            "claim_type": "at_fault",
+            "count_threshold": 2,
+            "lookback_years": 5,
+            "action": "deny",
+            "reason": "Multiple at-fault claims history"
+          }
+        },
+        {
+          "rule_id": "HS005",
+          "name": "Insurance Fraud History",
+          "description": "Previous insurance fraud convictions",
+          "criteria": {
+            "fraud_conviction": true,
+            "action": "deny",
+            "reason": "Insurance fraud history"
+          }
+        },
+        {
+          "rule_id": "HS006",
+          "name": "Extended Coverage Lapse",
+          "description": "Coverage lapse exceeding 60 days (CONSERVATIVE)",
+          "criteria": {
+            "coverage_lapse_days": 60,
+            "action": "deny",
+            "reason": "Extended coverage lapse exceeding 60 days"
+          }
+        },
+        {
+          "rule_id": "HS007",
+          "name": "Poor Credit Score",
+          "description": "Credit score below 500 (CONSERVATIVE)",
+          "criteria": {
+            "credit_score_max": 500,
+            "action": "deny",
+            "reason": "Credit score below acceptable threshold"
+          }
+        },
+        {
+          "rule_id": "HS008",
+          "name": "Young Driver Violations",
+          "description": "Drivers under 23 with any major violations (CONSERVATIVE)",
+          "criteria": {
+            "driver_age_max": 22,
+            "major_violations": true,
+            "action": "deny",
+            "reason": "Young driver with major violations"
+          }
+        }
+      ]
+    },
+
+    "adjudication_triggers": {
+      "description": "Conditions requiring manual underwriter review (CONSERVATIVE)",
+      "rules": [
+        {
+          "rule_id": "ADJ001",
+          "name": "Minor Violation History",
+          "description": "Two or more minor violations (CONSERVATIVE)",
+          "criteria": {
+            "minor_violations_count": 2,
+            "lookback_years": 3,
+            "action": "adjudicate",
+            "reason": "Multiple minor violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ002", 
+          "name": "Single At-Fault Claim",
+          "description": "Any at-fault claim within recent period (CONSERVATIVE)",
+          "criteria": {
+            "at_fault_claims_count": 1,
+            "lookback_years": 3,
+            "action": "adjudicate",
+            "reason": "Recent at-fault claim requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ003",
+          "name": "Young Driver Any Violations", 
+          "description": "Drivers under 25 with any violations (CONSERVATIVE)",
+          "criteria": {
+            "driver_age_max": 24,
+            "any_violations": true,
+            "lookback_years": 5,
+            "action": "adjudicate",
+            "reason": "Young driver with violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ004",
+          "name": "High-Performance Vehicle",
+          "description": "Any sports car or high-performance vehicle (CONSERVATIVE)",
+          "criteria": {
+            "vehicle_category": ["sports_car", "luxury", "high_performance", "convertible", "performance"],
+            "action": "adjudicate",
+            "reason": "High-performance vehicle requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ005",
+          "name": "Credit Score Issues",
+          "description": "Credit score below 650 (CONSERVATIVE)",
+          "criteria": {
+            "credit_score_max": 650,
+            "action": "adjudicate",
+            "reason": "Credit score requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ006",
+          "name": "Any Coverage Lapse",
+          "description": "Any coverage lapse requiring review (CONSERVATIVE)",
+          "criteria": {
+            "coverage_lapse_days_min": 1,
+            "coverage_lapse_days_max": 59,
+            "action": "adjudicate",
+            "reason": "Coverage lapse requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ007",
+          "name": "Senior Driver",
+          "description": "Drivers over 70 require review (CONSERVATIVE)",
+          "criteria": {
+            "driver_age_min": 70,
+            "action": "adjudicate",
+            "reason": "Senior driver requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ008",
+          "name": "High Vehicle Value",
+          "description": "Vehicles valued over $40,000 (CONSERVATIVE)",
+          "criteria": {
+            "vehicle_value_min": 40000,
+            "action": "adjudicate",
+            "reason": "High-value vehicle requiring review"
+          }
+        }
+      ]
+    },
+
+    "acceptance_criteria": {
+      "description": "Conditions for automatic acceptance (CONSERVATIVE)",
+      "rules": [
+        {
+          "rule_id": "ACC001",
+          "name": "Perfect Record Mature Driver",
+          "description": "Mature drivers with perfect records only (CONSERVATIVE)",
+          "criteria": {
+            "driver_age_min": 30,
+            "driver_age_max": 65,
+            "violations_count": 0,
+            "at_fault_claims_count": 0,
+            "lookback_years": 7,
+            "license_status": "valid",
+            "coverage_lapse_days": 0,
+            "credit_score_min": 700,
+            "action": "accept",
+            "reason": "Perfect record mature driver with excellent credit"
+          }
+        }
+      ]
+    },
+
+    "evaluation_parameters": {
+      "lookback_periods": {
+        "violations": 7,
+        "claims": 5,
+        "license_issues": 5
+      },
+      "age_categories": {
+        "young_driver": {"min": 16, "max": 24},
+        "mature_driver": {"min": 25, "max": 65}, 
+        "senior_driver": {"min": 66, "max": 99}
+      },
+      "violation_severity": {
+        "major": ["DUI", "reckless_driving", "hit_and_run", "vehicular_homicide"],
+        "moderate": ["speeding_15_over", "improper_passing", "following_too_close"],
+        "minor": ["speeding_10_under", "improper_turn", "parking_violation"]
+      },
+      "vehicle_categories": {
+        "standard": ["sedan", "suv", "minivan", "pickup"],
+        "sports_car": ["sports_car", "convertible", "performance"],
+        "luxury": ["luxury_sedan", "luxury_suv"],
+        "high_performance": ["supercar", "racing", "modified"]
+      }
+    }
+  }
+}
+

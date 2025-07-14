@@ -1,0 +1,39 @@
+{
+  "id": "eef43d68-4dd3-47ae-9955-63837516bad9",
+  "application_date": "2025-07-14 09:16:21.745729",
+  "applicant": {
+    "id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+    "first_name": "Jane",
+    "last_name": "Lopez",
+    "date_of_birth": "1953-11-12",
+    "license_number": "J79823019",
+    "license_status": "valid",
+    "license_state": "KS",
+    "license_issue_date": "1969-11-08",
+    "license_expiration_date": "2027-04-28",
+    "violations": [],
+    "claims": [],
+    "years_licensed": 55
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "e6d50ce7-35ae-4c78-8c1f-3c3631996de7",
+      "year": 2016,
+      "make": "Ferrari",
+      "model": "Roma",
+      "vin": "R4KS48JTJEUCNXW13",
+      "category": "convertible",
+      "value": "5613",
+      "usage": "personal",
+      "annual_mileage": 18941,
+      "anti_theft_device": false
+    }
+  ],
+  "credit_score": 719,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Nationwide",
+  "policy_limit": "250000",
+  "deductible": "250"
+}

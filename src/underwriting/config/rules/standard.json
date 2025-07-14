@@ -1,0 +1,224 @@
+{
+  "underwriting_rules": {
+    "version": "1.0",
+    "last_updated": "2025-12-06",
+    "description": "Structured automobile insurance underwriting rules for basic eligibility assessment",
+    
+    "hard_stops": {
+      "description": "Automatic declination criteria - immediate denial",
+      "rules": [
+        {
+          "rule_id": "HS001",
+          "name": "Invalid Driver License",
+          "description": "Driver license must be valid, unexpired, and not suspended/revoked",
+          "criteria": {
+            "license_status": ["suspended", "revoked", "expired", "invalid"],
+            "action": "deny",
+            "reason": "Invalid or suspended driver license"
+          }
+        },
+        {
+          "rule_id": "HS002", 
+          "name": "Major Violations - DUI",
+          "description": "Multiple DUI convictions within lookback period",
+          "criteria": {
+            "violation_type": "DUI",
+            "count_threshold": 2,
+            "lookback_years": 5,
+            "action": "deny",
+            "reason": "Multiple DUI convictions"
+          }
+        },
+        {
+          "rule_id": "HS003",
+          "name": "Major Violations - Reckless Driving", 
+          "description": "Multiple reckless driving convictions",
+          "criteria": {
+            "violation_type": "reckless_driving",
+            "count_threshold": 2,
+            "lookback_years": 3,
+            "action": "deny", 
+            "reason": "Multiple reckless driving convictions"
+          }
+        },
+        {
+          "rule_id": "HS004",
+          "name": "Excessive Claims History",
+          "description": "Too many at-fault claims in recent history",
+          "criteria": {
+            "claim_type": "at_fault",
+            "count_threshold": 3,
+            "lookback_years": 5,
+            "action": "deny",
+            "reason": "Excessive at-fault claims history"
+          }
+        },
+        {
+          "rule_id": "HS005",
+          "name": "Insurance Fraud History",
+          "description": "Previous insurance fraud convictions",
+          "criteria": {
+            "fraud_conviction": true,
+            "action": "deny",
+            "reason": "Insurance fraud history"
+          }
+        },
+        {
+          "rule_id": "HS006",
+          "name": "Extended Coverage Lapse",
+          "description": "Extended period without insurance coverage",
+          "criteria": {
+            "coverage_lapse_days": 90,
+            "action": "deny",
+            "reason": "Extended coverage lapse exceeding 90 days"
+          }
+        }
+      ]
+    },
+
+    "adjudication_triggers": {
+      "description": "Conditions requiring manual underwriter review",
+      "rules": [
+        {
+          "rule_id": "ADJ001",
+          "name": "Moderate Violation History",
+          "description": "Moderate violations requiring review",
+          "criteria": {
+            "minor_violations_count": 3,
+            "lookback_years": 3,
+            "action": "adjudicate",
+            "reason": "Multiple minor violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ002", 
+          "name": "Single Major Violation",
+          "description": "One major violation within recent period",
+          "criteria": {
+            "major_violation_count": 1,
+            "violation_types": ["DUI", "reckless_driving", "hit_and_run"],
+            "lookback_years": 3,
+            "action": "adjudicate",
+            "reason": "Recent major violation requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ003",
+          "name": "Moderate Claims History", 
+          "description": "Moderate claims requiring review",
+          "criteria": {
+            "at_fault_claims_count": 2,
+            "lookback_years": 5,
+            "action": "adjudicate",
+            "reason": "Multiple at-fault claims requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ004",
+          "name": "Young Driver High Risk",
+          "description": "Young drivers with any violations",
+          "criteria": {
+            "driver_age_max": 21,
+            "any_violations": true,
+            "lookback_years": 3,
+            "action": "adjudicate", 
+            "reason": "Young driver with violations requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ005",
+          "name": "High-Performance Vehicle",
+          "description": "High-performance or luxury vehicles",
+          "criteria": {
+            "vehicle_category": ["sports_car", "luxury", "high_performance"],
+            "action": "adjudicate",
+            "reason": "High-performance vehicle requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ006",
+          "name": "Credit Score Issues",
+          "description": "Poor credit score requiring review",
+          "criteria": {
+            "credit_score_max": 550,
+            "action": "adjudicate",
+            "reason": "Poor credit score requiring review"
+          }
+        },
+        {
+          "rule_id": "ADJ007",
+          "name": "Short Coverage Lapse",
+          "description": "Coverage lapse requiring review",
+          "criteria": {
+            "coverage_lapse_days_min": 31,
+            "coverage_lapse_days_max": 89,
+            "action": "adjudicate",
+            "reason": "Coverage lapse requiring review"
+          }
+        }
+      ]
+    },
+
+    "acceptance_criteria": {
+      "description": "Conditions for automatic acceptance",
+      "rules": [
+        {
+          "rule_id": "ACC001",
+          "name": "Clean Record Mature Driver",
+          "description": "Mature drivers with clean records",
+          "criteria": {
+            "driver_age_min": 25,
+            "driver_age_max": 65,
+            "violations_count": 0,
+            "at_fault_claims_count": 0,
+            "lookback_years": 5,
+            "license_status": "valid",
+            "coverage_lapse_days": 0,
+            "action": "accept",
+            "reason": "Clean record mature driver"
+          }
+        },
+        {
+          "rule_id": "ACC002", 
+          "name": "Good Driver Minor Issues",
+          "description": "Good drivers with minimal issues",
+          "criteria": {
+            "driver_age_min": 25,
+            "minor_violations_max": 1,
+            "at_fault_claims_max": 1,
+            "lookback_years": 5,
+            "license_status": "valid",
+            "coverage_lapse_days_max": 30,
+            "action": "accept",
+            "reason": "Good driver with minimal issues"
+          }
+        }
+      ]
+    },
+
+    "evaluation_parameters": {
+      "lookback_periods": {
+        "violations": 5,
+        "claims": 5,
+        "license_issues": 3
+      },
+      "age_categories": {
+        "young_driver": {"min": 16, "max": 24},
+        "mature_driver": {"min": 25, "max": 65}, 
+        "senior_driver": {"min": 66, "max": 99}
+      },
+      "violation_severity": {
+        "major": ["DUI", "reckless_driving", "hit_and_run", "vehicular_homicide"],
+        "moderate": ["speeding_15_over", "improper_passing", "following_too_close"],
+        "minor": ["speeding_10_under", "improper_turn", "parking_violation"]
+      },
+      "vehicle_categories": {
+        "standard": ["sedan", "suv", "minivan", "pickup"],
+        "sports_car": ["sports_car", "convertible", "performance"],
+        "luxury": ["luxury_sedan", "luxury_suv"],
+        "high_performance": ["supercar", "racing", "modified"]
+      }
+    }
+  }
+}
+

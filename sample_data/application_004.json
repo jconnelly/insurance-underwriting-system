@@ -1,0 +1,87 @@
+{
+  "id": "984deefa-048f-4335-8554-b713bb4a7400",
+  "application_date": "2025-07-14 09:12:08.168942",
+  "applicant": {
+    "id": "896d0f39-4e7c-4e62-9258-7a711eb052c5",
+    "first_name": "Anthony",
+    "last_name": "Lewis",
+    "date_of_birth": "1959-05-03",
+    "license_number": "S54646293",
+    "license_status": "valid",
+    "license_state": "OR",
+    "license_issue_date": "1975-04-29",
+    "license_expiration_date": "2028-02-04",
+    "violations": [
+      {
+        "id": "f44eb0c5-9173-4635-ad7d-ba0195ae73d7",
+        "violation_type": "speeding_15_over",
+        "violation_date": "2021-08-26",
+        "description": "Speeding 15 Over violation",
+        "severity": "moderate",
+        "fine_amount": "56",
+        "points": 1,
+        "conviction_date": "2021-11-15"
+      }
+    ],
+    "claims": [
+      {
+        "id": "8a937f3a-371c-4a36-8db1-7d7fff690fcd",
+        "claim_type": "at_fault",
+        "claim_date": "2018-10-21",
+        "description": "At Fault claim",
+        "amount": "19867",
+        "at_fault": true,
+        "closed_date": "2019-02-05",
+        "settlement_amount": "17558.5977328937518994"
+      }
+    ],
+    "years_licensed": 50
+  },
+  "additional_drivers": [
+    {
+      "id": "2e9d2912-93be-42be-b8f2-c44e37b51049",
+      "first_name": "Michael",
+      "last_name": "Thompson",
+      "date_of_birth": "1949-07-13",
+      "license_number": "I37629015",
+      "license_status": "valid",
+      "license_state": "CT",
+      "license_issue_date": "1965-07-09",
+      "license_expiration_date": "2028-06-24",
+      "violations": [
+        {
+          "id": "649442fe-2de0-4f07-a708-4d732d91552d",
+          "violation_type": "speeding_10_under",
+          "violation_date": "2021-02-07",
+          "description": "Speeding 10 Under violation",
+          "severity": "minor",
+          "fine_amount": "572",
+          "points": 2,
+          "conviction_date": "2021-04-27"
+        }
+      ],
+      "claims": [],
+      "years_licensed": 60
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "459c48e5-73ed-4be4-a38c-42e77b92bae8",
+      "year": 2018,
+      "make": "BMW",
+      "model": "7 Series",
+      "vin": "PCBM8TFS45BKRHVGM",
+      "category": "luxury_sedan",
+      "value": "23913",
+      "usage": "personal",
+      "annual_mileage": 9001,
+      "anti_theft_device": false
+    }
+  ],
+  "credit_score": 587,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "USAA",
+  "policy_limit": "1000000",
+  "deductible": "250"
+}
