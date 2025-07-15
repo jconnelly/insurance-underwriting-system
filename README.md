@@ -591,7 +591,190 @@ Prompt Tokens: 8,200
 Completion Tokens: 4,250
 ```
 
+## A/B Testing Framework
+
+### Overview
+
+The insurance underwriting system includes a comprehensive A/B testing framework for comparing different underwriting approaches, rule sets, and AI configurations:
+
+- **Statistical Analysis**: Chi-square, t-tests, proportion tests with scipy
+- **Sample Generation**: Realistic sample data with different risk profiles
+- **Test Configuration**: Predefined and custom test configurations
+- **Results Management**: Comprehensive reporting and analysis
+- **CLI Integration**: Full command-line interface for test management
+
+### A/B Testing Configuration
+
+A/B tests are configured in `src/underwriting/config/ab_tests.json` with predefined test templates:
+
+```json
+{
+  "predefined_test_templates": {
+    "rule_comparison": {
+      "description": "Template for comparing different rule sets",
+      "test_type": "rule_set_comparison",
+      "recommended_metrics": ["acceptance_rate", "avg_risk_score", "decision_distribution"]
+    },
+    "ai_comparison": {
+      "description": "Template for comparing AI vs rules-based approaches", 
+      "test_type": "ai_vs_rules",
+      "recommended_metrics": ["acceptance_rate", "avg_risk_score", "processing_time"]
+    }
+  }
+}
+```
+
+### A/B Testing CLI Commands
+
+#### Configuration Management
+```bash
+# List available test configurations
+python -m underwriting.cli.main ab-list-configs
+
+# Show detailed configuration
+python -m underwriting.cli.main ab-show-config conservative_vs_standard
+
+# Filter configurations by type
+python -m underwriting.cli.main ab-list-configs --type rule_set_comparison
+```
+
+#### Test Management
+```bash
+# Create and start a new A/B test
+python -m underwriting.cli.main ab-create-test conservative_vs_standard --sample-size 1000 --profile mixed
+
+# Run A/B test by processing applications
+python -m underwriting.cli.main ab-run-test conservative_vs_standard --batch-size 100
+
+# Check test status and preliminary results
+python -m underwriting.cli.main ab-test-status conservative_vs_standard --detailed
+
+# Stop a running test
+python -m underwriting.cli.main ab-stop-test conservative_vs_standard
+```
+
+#### Results and Reporting
+```bash
+# Generate comprehensive test report
+python -m underwriting.cli.main ab-generate-report conservative_vs_standard --format html
+
+# List all A/B tests
+python -m underwriting.cli.main ab-list-tests
+
+# Clean up old test data
+python -m underwriting.cli.main ab-cleanup --days 30
+```
+
+### Predefined A/B Test Configurations
+
+**Rule Set Comparisons:**
+- `conservative_vs_standard`: Compare conservative and standard rule sets
+- `standard_vs_liberal`: Compare standard and liberal rule sets
+
+**AI vs Rules:**
+- `ai_vs_standard_rules`: Compare AI-enhanced vs standard rules-only approach
+- `ai_conservative_vs_liberal_rules`: Compare AI + conservative vs liberal rules
+
+**AI Model Comparisons:**
+- `gpt4_vs_gpt35_turbo`: Compare GPT-4 and GPT-3.5 Turbo models
+
+**Performance Tests:**
+- `rate_limiting_impact`: Analyze impact of rate limiting on performance
+- `high_volume_performance`: Test system performance under high volume
+
+### Statistical Analysis Features
+
+**Supported Statistical Tests:**
+- **Chi-square test**: For categorical variables (decision distribution)
+- **Two-proportion test**: For acceptance rate comparisons
+- **Independent t-test**: For continuous variables (risk scores)
+- **Mann-Whitney U test**: For non-parametric comparisons (processing time)
+
+**Power Analysis:**
+```python
+from underwriting.ab_testing.sample_generator import ABTestSampleGenerator
+
+generator = ABTestSampleGenerator()
+sample_size, applications = generator.generate_power_analysis_samples(
+    effect_size=0.1,
+    power=0.8
+)
+```
+
+### Sample Data Profiles
+
+**Risk Profiles for Testing:**
+- `low_risk`: Mature drivers, clean records, good credit (80% low risk)
+- `medium_risk`: Mixed risk factors, moderate violations (50% medium risk)
+- `high_risk`: Young/old drivers, multiple violations, poor credit (60% high risk)
+- `mixed`: Balanced distribution across all risk levels
+- `edge_cases`: Extreme scenarios for stress testing
+
+**Stratified Sampling:**
+```bash
+# Generate samples with specific strata
+python -m underwriting.cli.main ab-create-test ai_vs_standard_rules --profile mixed
+```
+
+### A/B Test Reports
+
+**Report Formats:**
+- **JSON**: Machine-readable data with full statistical analysis
+- **HTML**: Formatted report with tables and visualizations
+- **Markdown**: Documentation-friendly format
+
+**Report Contents:**
+- Statistical significance for all metrics
+- Effect sizes and confidence intervals
+- Business impact analysis with projected changes
+- Cost analysis (for AI-enabled tests)
+- Risk analysis and decision distribution changes
+- Actionable conclusions and recommendations
+- Next steps based on results
+
+### Integration with Existing Systems
+
+**Seamless Integration:**
+- Works with all rule sets (conservative, standard, liberal)
+- Supports both rules-only and AI-enhanced evaluations
+- Integrates with rate limiting system
+- Uses existing sample data generation
+- Maintains audit trails and logging
+
+**API Usage:**
+```python
+from underwriting.ab_testing.framework import ABTestFramework
+from underwriting.ab_testing.config import ABTestConfigManager
+
+# Create and run A/B test
+config_manager = ABTestConfigManager()
+config = config_manager.get_config("conservative_vs_standard")
+
+framework = ABTestFramework()
+test = framework.create_test(config)
+framework.start_test(test.test_id)
+
+# Evaluate applications
+for application in applications:
+    result = await framework.evaluate_application(test.test_id, application)
+
+# Generate report
+framework.stop_test(test.test_id)
+summary = framework.get_test_summary(test.test_id)
+```
+
 ## Changelog
+
+### Version 3.0.0
+
+- **A/B Testing Framework**: Comprehensive statistical A/B testing system
+- **Statistical Analysis**: Chi-square, t-tests, proportion tests with scipy
+- **Sample Generation**: Advanced sample data generation with risk profiles
+- **Test Configuration**: Predefined and custom test configurations
+- **Results Management**: Detailed reporting with HTML, JSON, and Markdown formats
+- **CLI A/B Commands**: 8 new commands for complete A/B test management
+- **Power Analysis**: Sample size and statistical power calculations
+- **Integration**: Seamless integration with existing AI and rate limiting systems
 
 ### Version 2.0.0
 

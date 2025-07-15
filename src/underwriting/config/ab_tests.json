@@ -1,0 +1,91 @@
+{
+  "custom_configs": [],
+  "default_settings": {
+    "confidence_level": 0.95,
+    "minimum_effect_size": 0.05,
+    "default_sample_size": 1000,
+    "success_metrics": [
+      "acceptance_rate",
+      "avg_risk_score",
+      "decision_distribution",
+      "processing_time"
+    ]
+  },
+  "predefined_test_templates": {
+    "rule_comparison": {
+      "description": "Template for comparing different rule sets",
+      "test_type": "rule_set_comparison",
+      "required_configs": ["rule_set"],
+      "recommended_metrics": ["acceptance_rate", "avg_risk_score", "decision_distribution"],
+      "sample_size_recommendation": 1000
+    },
+    "ai_comparison": {
+      "description": "Template for comparing AI vs rules-based approaches",
+      "test_type": "ai_vs_rules",
+      "required_configs": ["ai_enabled", "rule_set"],
+      "recommended_metrics": ["acceptance_rate", "avg_risk_score", "processing_time"],
+      "sample_size_recommendation": 1500
+    },
+    "model_comparison": {
+      "description": "Template for comparing different AI models",
+      "test_type": "ai_model_comparison",
+      "required_configs": ["ai_model"],
+      "recommended_metrics": ["acceptance_rate", "avg_risk_score", "processing_time"],
+      "sample_size_recommendation": 800
+    },
+    "performance_comparison": {
+      "description": "Template for performance and scalability testing",
+      "test_type": "performance_comparison",
+      "required_configs": ["batch_size", "concurrent_requests"],
+      "recommended_metrics": ["processing_time", "throughput", "error_rate"],
+      "sample_size_recommendation": 2000
+    }
+  },
+  "metric_definitions": {
+    "acceptance_rate": {
+      "description": "Percentage of applications that are accepted",
+      "type": "proportion",
+      "higher_is_better": true,
+      "statistical_test": "proportion_test"
+    },
+    "avg_risk_score": {
+      "description": "Average risk score of evaluated applications",
+      "type": "continuous",
+      "higher_is_better": false,
+      "statistical_test": "t_test"
+    },
+    "decision_distribution": {
+      "description": "Distribution of decisions (accept/deny/adjudicate)",
+      "type": "categorical",
+      "higher_is_better": null,
+      "statistical_test": "chi_square"
+    },
+    "processing_time": {
+      "description": "Average time to process an application",
+      "type": "continuous",
+      "higher_is_better": false,
+      "statistical_test": "mann_whitney"
+    }
+  },
+  "stopping_rules": {
+    "max_sample_size": 10000,
+    "max_duration_hours": 168,
+    "early_stopping": {
+      "enabled": true,
+      "check_interval_samples": 100,
+      "min_samples_before_stopping": 200,
+      "significance_threshold": 0.01
+    }
+  },
+  "system_settings": {
+    "max_concurrent_tests": 5,
+    "data_retention_days": 365,
+    "auto_cleanup_completed_tests": true,
+    "notification_settings": {
+      "test_completion": true,
+      "significant_results": true,
+      "error_alerts": true
+    }
+  },
+  "last_updated": "2024-01-01T00:00:00"
+}

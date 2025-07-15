@@ -1406,5 +1406,538 @@ def ai_token_usage(
         raise typer.Exit(1)
 
 
+# A/B Testing Commands
+
+@app.command(name="ab-list-configs")
+def ab_list_configs(
+    test_type: Optional[str] = typer.Option(None, "--type", "-t", help="Filter by test type"),
+    tags: Optional[str] = typer.Option(None, "--tags", help="Filter by tags (comma-separated)"),
+    predefined_only: bool = typer.Option(False, "--predefined", help="Show only predefined configs"),
+):
+    """List available A/B test configurations."""
+    try:
+        from underwriting.ab_testing.config import ABTestConfigManager, ABTestType
+        
+        config_manager = ABTestConfigManager()
+        
+        # Parse filters
+        test_type_filter = None
+        if test_type:
+            try:
+                test_type_filter = ABTestType(test_type)
+            except ValueError:
+                console.print(f"[red]Invalid test type: {test_type}[/red]")
+                raise typer.Exit(1)
+        
+        tags_filter = None
+        if tags:
+            tags_filter = [tag.strip() for tag in tags.split(',')]
+        
+        # Get configurations
+        configs = config_manager.list_configs(test_type_filter, tags_filter)
+        
+        if predefined_only:
+            configs = [c for c in configs if c.test_id in config_manager.predefined_configs]
+        
+        if not configs:
+            console.print("[yellow]No configurations found matching the criteria.[/yellow]")
+            return
+        
+        # Display configurations
+        table = Table(title="A/B Test Configurations")
+        table.add_column("Test ID", style="cyan")
+        table.add_column("Name", style="bold")
+        table.add_column("Type", style="green")
+        table.add_column("Sample Size", justify="right", style="yellow")
+        table.add_column("Metrics", style="blue")
+        table.add_column("Tags", style="magenta")
+        
+        for config in configs:
+            table.add_row(
+                config.test_id,
+                config.name,
+                config.test_type.value,
+                str(config.sample_size),
+                ", ".join(config.success_metrics[:2]) + ("..." if len(config.success_metrics) > 2 else ""),
+                ", ".join(config.tags[:2]) + ("..." if len(config.tags) > 2 else "")
+            )
+        
+        console.print(table)
+        
+    except Exception as e:
+        console.print(f"[red]Error listing configurations: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-show-config")
+def ab_show_config(
+    test_id: str = typer.Argument(..., help="Test ID to show"),
+    output_file: Optional[str] = typer.Option(None, "--output", "-f", help="Export to file"),
+):
+    """Show detailed A/B test configuration."""
+    try:
+        from underwriting.ab_testing.config import ABTestConfigManager
+        
+        config_manager = ABTestConfigManager()
+        config = config_manager.get_config(test_id)
+        
+        if not config:
+            console.print(f"[red]Configuration '{test_id}' not found.[/red]")
+            raise typer.Exit(1)
+        
+        # Display configuration
+        console.print(f"[bold]A/B Test Configuration: {config.name}[/bold]")
+        console.print(f"[bold]Test ID:[/bold] {config.test_id}")
+        console.print(f"[bold]Description:[/bold] {config.description}")
+        console.print(f"[bold]Test Type:[/bold] {config.test_type.value}")
+        console.print(f"[bold]Sample Size:[/bold] {config.sample_size}")
+        console.print(f"[bold]Confidence Level:[/bold] {config.confidence_level}")
+        console.print(f"[bold]Minimum Effect Size:[/bold] {config.minimum_effect_size}")
+        console.print(f"[bold]Success Metrics:[/bold] {', '.join(config.success_metrics)}")
+        console.print(f"[bold]Tags:[/bold] {', '.join(config.tags)}")
+        
+        # Control configuration
+        console.print(f"\n[bold]Control Configuration:[/bold]")
+        for key, value in config.control_config.items():
+            console.print(f"  {key}: {value}")
+        
+        # Treatment configuration
+        console.print(f"\n[bold]Treatment Configuration:[/bold]")
+        for key, value in config.treatment_config.items():
+            console.print(f"  {key}: {value}")
+        
+        # Export if requested
+        if output_file:
+            config_manager.export_config(test_id, output_file)
+            console.print(f"[green]Configuration exported to: {output_file}[/green]")
+        
+    except Exception as e:
+        console.print(f"[red]Error showing configuration: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-create-test")
+def ab_create_test(
+    config_id: str = typer.Argument(..., help="Configuration ID to use"),
+    sample_size: Optional[int] = typer.Option(None, "--sample-size", "-s", help="Override sample size"),
+    profile: str = typer.Option("mixed", "--profile", "-p", help="Sample profile (low_risk, medium_risk, high_risk, mixed, edge_cases)"),
+):
+    """Create and start a new A/B test."""
+    try:
+        from underwriting.ab_testing.config import ABTestConfigManager
+        from underwriting.ab_testing.framework import ABTestFramework
+        from underwriting.ab_testing.sample_generator import ABTestSampleGenerator, ABTestSampleProfile
+        
+        # Get configuration
+        config_manager = ABTestConfigManager()
+        config = config_manager.get_config(config_id)
+        
+        if not config:
+            console.print(f"[red]Configuration '{config_id}' not found.[/red]")
+            raise typer.Exit(1)
+        
+        # Override sample size if provided
+        if sample_size:
+            config.sample_size = sample_size
+        
+        # Create framework and test
+        framework = ABTestFramework()
+        test = framework.create_test(config)
+        
+        console.print(f"[green]Created A/B test: {test.test_id}[/green]")
+        console.print(f"[bold]Name:[/bold] {config.name}")
+        console.print(f"[bold]Sample Size:[/bold] {config.sample_size}")
+        console.print(f"[bold]Test Type:[/bold] {config.test_type.value}")
+        
+        # Generate sample data
+        try:
+            sample_profile = ABTestSampleProfile(profile)
+        except ValueError:
+            console.print(f"[red]Invalid profile: {profile}[/red]")
+            raise typer.Exit(1)
+        
+        console.print(f"\n[yellow]Generating sample data with profile: {profile}[/yellow]")
+        sample_generator = ABTestSampleGenerator(seed=42)
+        applications = sample_generator.generate_test_samples(sample_profile, config.sample_size)
+        
+        console.print(f"[green]Generated {len(applications)} sample applications[/green]")
+        
+        # Start test
+        framework.start_test(test.test_id)
+        console.print(f"[green]A/B test started successfully[/green]")
+        
+        # Store applications for later use (in a real system, this would be handled differently)
+        test_data_file = f"ab_test_data/{test.test_id}_applications.json"
+        import os
+        os.makedirs("ab_test_data", exist_ok=True)
+        
+        with open(test_data_file, 'w') as f:
+            import json
+            json.dump([app.dict() for app in applications], f, indent=2, default=str)
+        
+        console.print(f"[blue]Sample applications saved to: {test_data_file}[/blue]")
+        console.print(f"[yellow]Use 'ab-run-test {test.test_id}' to process applications[/yellow]")
+        
+    except Exception as e:
+        console.print(f"[red]Error creating test: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-run-test")
+def ab_run_test(
+    test_id: str = typer.Argument(..., help="Test ID to run"),
+    batch_size: int = typer.Option(100, "--batch-size", "-b", help="Batch size for processing"),
+    max_applications: Optional[int] = typer.Option(None, "--max", "-m", help="Maximum applications to process"),
+):
+    """Run A/B test by processing applications."""
+    try:
+        from underwriting.ab_testing.framework import ABTestFramework
+        from underwriting.core.models import Application
+        import json
+        import asyncio
+        
+        # Get framework and test
+        framework = ABTestFramework()
+        test = framework.get_test(test_id)
+        
+        if not test:
+            console.print(f"[red]Test '{test_id}' not found.[/red]")
+            raise typer.Exit(1)
+        
+        # Load applications
+        test_data_file = f"ab_test_data/{test_id}_applications.json"
+        
+        if not os.path.exists(test_data_file):
+            console.print(f"[red]Test data file not found: {test_data_file}[/red]")
+            raise typer.Exit(1)
+        
+        with open(test_data_file, 'r') as f:
+            app_data = json.load(f)
+        
+        applications = [Application(**data) for data in app_data]
+        
+        if max_applications:
+            applications = applications[:max_applications]
+        
+        console.print(f"[yellow]Processing {len(applications)} applications in batches of {batch_size}[/yellow]")
+        
+        # Process applications in batches
+        async def process_batch(batch_apps):
+            results = []
+            for app in batch_apps:
+                try:
+                    result = await framework.evaluate_application(test_id, app)
+                    results.append(result)
+                except Exception as e:
+                    console.print(f"[red]Error processing application {app.id}: {e}[/red]")
+            return results
+        
+        # Run processing
+        async def run_test():
+            total_processed = 0
+            
+            for i in range(0, len(applications), batch_size):
+                batch = applications[i:i + batch_size]
+                console.print(f"[blue]Processing batch {i//batch_size + 1}/{(len(applications) + batch_size - 1)//batch_size}[/blue]")
+                
+                batch_results = await process_batch(batch)
+                total_processed += len(batch_results)
+                
+                console.print(f"[green]Processed {len(batch_results)} applications (Total: {total_processed})[/green]")
+            
+            return total_processed
+        
+        total_processed = asyncio.run(run_test())
+        
+        console.print(f"[green]A/B test processing completed: {total_processed} applications processed[/green]")
+        console.print(f"[yellow]Use 'ab-test-status {test_id}' to view results[/yellow]")
+        
+    except Exception as e:
+        console.print(f"[red]Error running test: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-test-status")
+def ab_test_status(
+    test_id: str = typer.Argument(..., help="Test ID to check"),
+    detailed: bool = typer.Option(False, "--detailed", "-d", help="Show detailed statistics"),
+):
+    """Check A/B test status and preliminary results."""
+    try:
+        from underwriting.ab_testing.framework import ABTestFramework
+        
+        framework = ABTestFramework()
+        test = framework.get_test(test_id)
+        
+        if not test:
+            console.print(f"[red]Test '{test_id}' not found.[/red]")
+            raise typer.Exit(1)
+        
+        # Get test summary
+        summary = test.get_summary()
+        
+        console.print(f"[bold]A/B Test Status: {test.config.name}[/bold]")
+        console.print(f"[bold]Test ID:[/bold] {summary.test_id}")
+        console.print(f"[bold]Status:[/bold] {summary.status.value}")
+        console.print(f"[bold]Start Time:[/bold] {summary.start_time}")
+        console.print(f"[bold]End Time:[/bold] {summary.end_time or 'Running'}")
+        
+        # Sample sizes
+        console.print(f"\n[bold]Sample Sizes:[/bold]")
+        console.print(f"[bold]Control:[/bold] {len(summary.control_results)}")
+        console.print(f"[bold]Treatment:[/bold] {len(summary.treatment_results)}")
+        console.print(f"[bold]Total:[/bold] {len(summary.control_results) + len(summary.treatment_results)}")
+        console.print(f"[bold]Target:[/bold] {test.config.sample_size}")
+        
+        # Progress
+        total_results = len(summary.control_results) + len(summary.treatment_results)
+        progress = (total_results / test.config.sample_size) * 100 if test.config.sample_size > 0 else 0
+        console.print(f"[bold]Progress:[/bold] {progress:.1f}%")
+        
+        # Statistical results (if available)
+        if summary.statistical_analysis:
+            console.print(f"\n[bold]Statistical Results:[/bold]")
+            
+            for metric, analysis in summary.statistical_analysis.items():
+                if metric == "metadata":
+                    continue
+                
+                significant = analysis.get("significant", False)
+                effect_size = analysis.get("effect_size", 0)
+                p_value = analysis.get("p_value", 1.0)
+                
+                sig_indicator = "[green]✓[/green]" if significant else "[red]✗[/red]"
+                
+                console.print(f"  {metric}: {sig_indicator} (effect: {effect_size:.4f}, p: {p_value:.4f})")
+        
+        # Conclusions and recommendations
+        if summary.conclusions:
+            console.print(f"\n[bold]Conclusions:[/bold]")
+            for conclusion in summary.conclusions:
+                console.print(f"  • {conclusion}")
+        
+        if summary.recommendations:
+            console.print(f"\n[bold]Recommendations:[/bold]")
+            for recommendation in summary.recommendations:
+                console.print(f"  • {recommendation}")
+        
+        # Detailed statistics
+        if detailed and summary.statistical_analysis:
+            console.print(f"\n[bold]Detailed Statistics:[/bold]")
+            for metric, analysis in summary.statistical_analysis.items():
+                if metric == "metadata":
+                    continue
+                
+                console.print(f"\n[bold]{metric}:[/bold]")
+                for key, value in analysis.items():
+                    if key not in ["test_result"]:
+                        console.print(f"  {key}: {value}")
+        
+    except Exception as e:
+        console.print(f"[red]Error checking test status: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-stop-test")
+def ab_stop_test(
+    test_id: str = typer.Argument(..., help="Test ID to stop"),
+):
+    """Stop a running A/B test."""
+    try:
+        from underwriting.ab_testing.framework import ABTestFramework
+        
+        framework = ABTestFramework()
+        test = framework.get_test(test_id)
+        
+        if not test:
+            console.print(f"[red]Test '{test_id}' not found.[/red]")
+            raise typer.Exit(1)
+        
+        # Stop test
+        framework.stop_test(test_id)
+        
+        console.print(f"[green]A/B test stopped: {test_id}[/green]")
+        console.print(f"[yellow]Use 'ab-generate-report {test_id}' to generate final report[/yellow]")
+        
+    except Exception as e:
+        console.print(f"[red]Error stopping test: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-generate-report")
+def ab_generate_report(
+    test_id: str = typer.Argument(..., help="Test ID to generate report for"),
+    format: str = typer.Option("json", "--format", "-f", help="Report format (json, html, markdown)"),
+    output_file: Optional[str] = typer.Option(None, "--output", "-o", help="Output file path"),
+):
+    """Generate comprehensive A/B test report."""
+    try:
+        from underwriting.ab_testing.results import ABTestResultsManager, ReportFormat
+        
+        # Validate format
+        try:
+            report_format = ReportFormat(format.lower())
+        except ValueError:
+            console.print(f"[red]Invalid format: {format}. Use json, html, or markdown.[/red]")
+            raise typer.Exit(1)
+        
+        # Generate report
+        results_manager = ABTestResultsManager()
+        report = results_manager.generate_test_report(test_id, report_format)
+        
+        console.print(f"[green]Generated report for test: {test.config.name}[/green]")
+        console.print(f"[bold]Test ID:[/bold] {report.test_id}")
+        console.print(f"[bold]Generated:[/bold] {report.generated_at}")
+        console.print(f"[bold]Duration:[/bold] {report.test_duration}")
+        
+        # Show sample sizes
+        console.print(f"\n[bold]Sample Sizes:[/bold]")
+        console.print(f"[bold]Control:[/bold] {report.sample_sizes.get('control', 0)}")
+        console.print(f"[bold]Treatment:[/bold] {report.sample_sizes.get('treatment', 0)}")
+        console.print(f"[bold]Total:[/bold] {report.sample_sizes.get('total', 0)}")
+        
+        # Show significance summary
+        console.print(f"\n[bold]Significance Summary:[/bold]")
+        for metric, significant in report.significance_summary.items():
+            effect_size = report.effect_sizes.get(metric, 0)
+            sig_indicator = "[green]✓[/green]" if significant else "[red]✗[/red]"
+            console.print(f"  {metric}: {sig_indicator} (effect: {effect_size:.4f})")
+        
+        # Show business impact
+        if report.business_impact:
+            console.print(f"\n[bold]Business Impact:[/bold]")
+            for metric, impact in report.business_impact.items():
+                if isinstance(impact, dict) and "projected_impact" in impact:
+                    console.print(f"  {metric}: {impact['projected_impact']}")
+        
+        # Show conclusions
+        if report.conclusions:
+            console.print(f"\n[bold]Conclusions:[/bold]")
+            for conclusion in report.conclusions:
+                console.print(f"  • {conclusion}")
+        
+        # Show recommendations
+        if report.recommendations:
+            console.print(f"\n[bold]Recommendations:[/bold]")
+            for recommendation in report.recommendations:
+                console.print(f"  • {recommendation}")
+        
+        # Show next steps
+        if report.next_steps:
+            console.print(f"\n[bold]Next Steps:[/bold]")
+            for step in report.next_steps:
+                console.print(f"  • {step}")
+        
+        # Copy to output file if specified
+        if output_file:
+            import shutil
+            report_file = f"ab_test_data/reports/{test_id}_report.{format}"
+            shutil.copy(report_file, output_file)
+            console.print(f"[green]Report copied to: {output_file}[/green]")
+        
+    except Exception as e:
+        console.print(f"[red]Error generating report: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-list-tests")
+def ab_list_tests():
+    """List all A/B tests."""
+    try:
+        from underwriting.ab_testing.framework import ABTestFramework
+        from underwriting.ab_testing.results import ABTestResultsManager
+        
+        framework = ABTestFramework()
+        results_manager = ABTestResultsManager()
+        
+        # Get active tests
+        active_tests = framework.list_tests()
+        
+        # Get completed tests
+        completed_tests = results_manager.list_completed_tests()
+        
+        # Display active tests
+        if active_tests:
+            console.print(f"[bold]Active Tests:[/bold]")
+            
+            table = Table(title="Active A/B Tests")
+            table.add_column("Test ID", style="cyan")
+            table.add_column("Name", style="bold")
+            table.add_column("Status", style="green")
+            table.add_column("Progress", justify="right", style="yellow")
+            table.add_column("Control", justify="right", style="blue")
+            table.add_column("Treatment", justify="right", style="blue")
+            
+            for test in active_tests:
+                progress = f"{test['control_results'] + test['treatment_results']}/{test['sample_size']}"
+                
+                table.add_row(
+                    test["test_id"],
+                    test["name"],
+                    test["status"],
+                    progress,
+                    str(test["control_results"]),
+                    str(test["treatment_results"])
+                )
+            
+            console.print(table)
+        
+        # Display completed tests
+        if completed_tests:
+            console.print(f"\n[bold]Completed Tests:[/bold]")
+            
+            table = Table(title="Completed A/B Tests")
+            table.add_column("Test ID", style="cyan")
+            table.add_column("Status", style="green")
+            table.add_column("Start Time", style="yellow")
+            table.add_column("End Time", style="yellow")
+            table.add_column("Control", justify="right", style="blue")
+            table.add_column("Treatment", justify="right", style="blue")
+            
+            for test in completed_tests:
+                table.add_row(
+                    test["test_id"],
+                    test["status"],
+                    test.get("start_time", "")[:19] if test.get("start_time") else "",
+                    test.get("end_time", "")[:19] if test.get("end_time") else "",
+                    str(test["control_results"]),
+                    str(test["treatment_results"])
+                )
+            
+            console.print(table)
+        
+        if not active_tests and not completed_tests:
+            console.print("[yellow]No A/B tests found.[/yellow]")
+        
+    except Exception as e:
+        console.print(f"[red]Error listing tests: {e}[/red]")
+        raise typer.Exit(1)
+
+
+@app.command(name="ab-cleanup")
+def ab_cleanup(
+    days: int = typer.Option(30, "--days", "-d", help="Clean up tests older than N days"),
+    confirm: bool = typer.Option(False, "--confirm", "-y", help="Confirm cleanup without prompt"),
+):
+    """Clean up old A/B test data."""
+    try:
+        from underwriting.ab_testing.results import ABTestResultsManager
+        
+        if not confirm:
+            response = typer.confirm(f"This will delete A/B test data older than {days} days. Continue?")
+            if not response:
+                console.print("[yellow]Cleanup cancelled.[/yellow]")
+                return
+        
+        results_manager = ABTestResultsManager()
+        cleaned_count = results_manager.cleanup_old_results(days)
+        
+        console.print(f"[green]Cleaned up {cleaned_count} old A/B tests[/green]")
+        
+    except Exception as e:
+        console.print(f"[red]Error during cleanup: {e}[/red]")
+        raise typer.Exit(1)
+
+
 if __name__ == "__main__":
     app()
