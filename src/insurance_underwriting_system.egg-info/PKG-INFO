@@ -397,7 +397,248 @@ For support and questions:
 - **Documentation**: Refer to this README and inline documentation
 - **Testing**: Use the CLI interface for testing and validation
 
+## Rate Limiting System
+
+### Overview
+
+The insurance underwriting system includes a comprehensive rate limiting system to control usage and ensure fair access to resources. The system provides:
+
+- **Multiple Time Windows**: Daily, weekly, monthly, and burst limits
+- **File-based Storage**: Persistent storage for rate limiting data
+- **Usage Analytics**: Detailed tracking and reporting
+- **Admin Override**: Emergency and testing override capabilities
+- **Graceful Degradation**: Fallback mechanisms when limits are exceeded
+
+### Rate Limiting Configuration
+
+Rate limits are configured in `src/underwriting/config/rate_limits.json`:
+
+```json
+{
+  "rate_limits": {
+    "underwriting_evaluations": {
+      "daily_limit": 1000,
+      "weekly_limit": 5000,
+      "monthly_limit": 20000,
+      "burst_limit": 100,
+      "burst_window_minutes": 60
+    },
+    "ai_evaluations": {
+      "daily_limit": 500,
+      "weekly_limit": 2000,
+      "monthly_limit": 8000,
+      "burst_limit": 50,
+      "burst_window_minutes": 60
+    }
+  }
+}
+```
+
+### Rate Limiting CLI Commands
+
+#### Check Rate Limit Status
+```bash
+# Check all rate limits
+python -m underwriting.cli.main rate-status --all
+
+# Check specific identifier and operation
+python -m underwriting.cli.main rate-status --identifier user123 --operation ai_evaluations
+```
+
+#### Generate Usage Analytics
+```bash
+# Generate analytics for last 24 hours
+python -m underwriting.cli.main rate-analytics --hours 24
+
+# Generate analytics for specific operation type
+python -m underwriting.cli.main rate-analytics --operation ai_evaluations --hours 12
+```
+
+#### Generate Usage Reports
+```bash
+# Generate daily usage report
+python -m underwriting.cli.main rate-report --type daily
+
+# Generate weekly report for specific operation
+python -m underwriting.cli.main rate-report --type weekly --operation underwriting_evaluations
+```
+
+#### Admin Override Management
+```bash
+# Request admin override
+python -m underwriting.cli.main rate-override user123 ai_evaluations --justification "Testing" --duration 24
+
+# Check override status
+python -m underwriting.cli.main rate-override-status
+
+# Revoke override
+python -m underwriting.cli.main rate-override user123 ai_evaluations --revoke
+```
+
+#### System Maintenance
+```bash
+# Clean up old rate limiting data
+python -m underwriting.cli.main rate-cleanup
+
+# Reload configuration
+python -m underwriting.cli.main rate-config-reload
+```
+
+### Rate Limiting Integration
+
+The rate limiting system is automatically integrated with the AI-enhanced underwriting engine:
+
+```python
+from underwriting.core.ai_engine import AIEnhancedUnderwritingEngine
+
+# Initialize with rate limiting enabled (default)
+engine = AIEnhancedUnderwritingEngine(rate_limiting_enabled=True)
+
+# Process application with automatic rate limiting
+decision = await engine.process_application_enhanced(application, use_ai=True)
+```
+
+### Graceful Degradation
+
+When AI evaluation rate limits are exceeded, the system can gracefully degrade:
+
+- **Fallback to Rules**: Fall back to rules-only evaluation
+- **Queue Requests**: Queue requests for later processing (optional)
+- **Error Handling**: Comprehensive error handling with meaningful messages
+
+### Analytics and Monitoring
+
+The system provides comprehensive analytics:
+
+- **Usage Patterns**: Hourly, daily, weekly, and monthly usage patterns
+- **Top Users**: Identify high-usage identifiers
+- **Success Rates**: Track success vs. blocked request rates
+- **Anomaly Detection**: Detect unusual usage patterns
+- **Trend Analysis**: Analyze usage trends over time
+
+### Admin Features
+
+- **Override System**: Emergency and testing overrides
+- **Bulk Operations**: Bulk reset and override management
+- **Audit Trail**: Complete logging of all admin actions
+- **Usage Alerts**: Automated alerts for unusual usage
+
+### File Storage Structure
+
+Rate limiting data is stored in the following structure:
+
+```
+rate_limit_data/
+├── usage/                    # Usage data files
+├── analytics/               # Analytics reports
+├── backups/                 # Automatic backups
+├── overrides/               # Override data
+├── admin_log.json          # Admin action log
+└── index.json              # Master index
+```
+
+### Security Considerations
+
+- **No Sensitive Data**: Rate limiting data contains no sensitive information
+- **Audit Trail**: Complete audit trail of all admin actions
+- **Configurable Limits**: All limits are configurable via JSON files
+- **Automatic Cleanup**: Old data is automatically cleaned up
+
+## AI Integration
+
+### Overview
+
+The system includes comprehensive AI integration with OpenAI GPT-4 and LangSmith tracing:
+
+- **AI-Enhanced Evaluations**: Combine rule-based and AI decisions
+- **LangSmith Tracing**: Full tracing with shareable URLs
+- **Graceful Degradation**: Fallback to rules when AI is unavailable
+- **Rate Limiting**: Separate rate limits for AI operations
+
+### AI Configuration
+
+AI features are configured in `src/underwriting/config/ai_config.json`:
+
+```json
+{
+  "ai_services": {
+    "openai": {
+      "enabled": true,
+      "api_key": "${OPENAI_API_KEY}",
+      "model": "gpt-4-turbo"
+    }
+  },
+  "langsmith": {
+    "enabled": true,
+    "api_key": "${LANGSMITH_API_KEY}",
+    "project_name": "insurance-underwriting"
+  }
+}
+```
+
+### AI CLI Commands
+
+```bash
+# AI-enhanced evaluation
+python -m underwriting.cli.main ai-evaluate application.json
+
+# AI-only evaluation
+python -m underwriting.cli.main ai-evaluate application.json --ai-only
+
+# Batch AI processing
+python -m underwriting.cli.main ai-batch sample_data/
+
+# AI service health check
+python -m underwriting.cli.main ai-health
+
+# OpenAI token usage tracking
+python -m underwriting.cli.main ai-token-usage --hours 24 --detailed
+```
+
+### OpenAI Token Usage Tracking
+
+The system includes comprehensive token usage tracking with cost estimation:
+
+```bash
+# View token usage for last 24 hours
+python -m underwriting.cli.main ai-token-usage --hours 24
+
+# View detailed token usage with breakdown
+python -m underwriting.cli.main ai-token-usage --hours 12 --detailed
+
+# Export token usage data to file
+python -m underwriting.cli.main ai-token-usage --hours 24 --output token_usage.json
+```
+
+**Token Usage Features:**
+- **Cost Estimation**: Real-time cost calculation based on OpenAI pricing
+- **Detailed Breakdown**: Input vs output token usage
+- **Usage History**: Track usage over time windows
+- **Rate Limiting Integration**: Automatic rate limit enforcement
+- **Export Capability**: Export usage data for analysis
+
+**Example Output:**
+```
+OpenAI Token Usage Summary (Last 24 hours)
+Model: gpt-4-turbo
+Total Requests: 15
+Total Tokens: 12,450
+Total Cost: $0.185750 USD
+Average Tokens/Request: 830.0
+Prompt Tokens: 8,200
+Completion Tokens: 4,250
+```
+
 ## Changelog
+
+### Version 2.0.0
+
+- **Rate Limiting System**: Comprehensive rate limiting with file-based storage
+- **Usage Analytics**: Detailed analytics and reporting capabilities
+- **Admin Override**: Emergency override system for testing and emergencies
+- **AI Integration**: OpenAI GPT-4 integration with LangSmith tracing
+- **Graceful Degradation**: Fallback mechanisms for high availability
+- **Enhanced CLI**: New commands for rate limiting and AI management
 
 ### Version 1.0.0
 

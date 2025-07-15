@@ -1,0 +1,42 @@
+{
+  "id": "09ad65d2-fe7d-4f07-844f-7580805ab41d",
+  "application_date": "2025-07-14 12:52:42.447539",
+  "applicant": {
+    "id": "549de1fb-24eb-4730-87d4-ea447c33569b",
+    "first_name": "Elizabeth",
+    "last_name": "Rodriguez",
+    "date_of_birth": "1965-05-17",
+    "gender": "not_specified",
+    "marital_status": "single",
+    "license_number": "M05747938",
+    "license_status": "valid",
+    "license_state": "AL",
+    "license_issue_date": "1981-05-13",
+    "license_expiration_date": "2026-07-11",
+    "violations": [],
+    "claims": [],
+    "years_licensed": 44
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "ef93e5a8-7604-4f21-88b0-15fbc042f86a",
+      "year": 2012,
+      "make": "Maserati",
+      "model": "Model 4",
+      "vin": "Y2FBD9RF45H4JXLDL",
+      "category": "luxury_suv",
+      "value": "9673",
+      "usage": "personal",
+      "annual_mileage": 21621,
+      "anti_theft_device": false,
+      "safety_rating": 3
+    }
+  ],
+  "credit_score": 607,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Travelers",
+  "policy_limit": "250000",
+  "deductible": "250"
+}

@@ -1,0 +1,64 @@
+{
+  "id": "3738a232-1be1-4b32-b0ca-386f0699a195",
+  "application_date": "2025-07-14 12:52:42.450061",
+  "applicant": {
+    "id": "2312ae9c-7104-4197-9470-c62a02c9e476",
+    "first_name": "Anthony",
+    "last_name": "Davis",
+    "date_of_birth": "1999-12-25",
+    "gender": "not_specified",
+    "marital_status": "single",
+    "license_number": "L51521442",
+    "license_status": "valid",
+    "license_state": "WI",
+    "license_issue_date": "2015-12-21",
+    "license_expiration_date": "2027-06-14",
+    "violations": [
+      {
+        "id": "b0122a24-8dfb-4894-b056-cad3120a76e7",
+        "violation_type": "improper_turn",
+        "violation_date": "2023-06-25",
+        "description": "Improper Turn violation",
+        "severity": "minor",
+        "fine_amount": "80",
+        "points": 1,
+        "conviction_date": "2023-08-25"
+      }
+    ],
+    "claims": [
+      {
+        "id": "eb09bb10-5f32-4d10-94ff-5b220bcf6c99",
+        "claim_type": "collision",
+        "claim_date": "2023-06-11",
+        "description": "Collision claim",
+        "amount": "3856",
+        "at_fault": false,
+        "closed_date": "2023-09-10",
+        "settlement_amount": "3347.9836111575658688"
+      }
+    ],
+    "years_licensed": 9
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "75c4ae70-b657-4718-9898-ba506e12e4c2",
+      "year": 2018,
+      "make": "Lexus",
+      "model": "Model 6",
+      "vin": "VRK9YL9619S66DR32",
+      "category": "pickup",
+      "value": "12904",
+      "usage": "personal",
+      "annual_mileage": 22085,
+      "anti_theft_device": false,
+      "safety_rating": 3
+    }
+  ],
+  "credit_score": 748,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "Erie",
+  "policy_limit": "250000",
+  "deductible": "1000"
+}

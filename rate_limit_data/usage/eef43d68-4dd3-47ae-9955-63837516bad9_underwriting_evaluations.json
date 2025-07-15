@@ -1,0 +1,62 @@
+{
+  "identifier": "eef43d68-4dd3-47ae-9955-63837516bad9",
+  "operation_type": "underwriting_evaluations",
+  "usage_records": [
+    {
+      "timestamp": 1752519520.9106135,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    },
+    {
+      "timestamp": 1752522100.37511,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    },
+    {
+      "timestamp": 1752522241.9878075,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    },
+    {
+      "timestamp": 1752522274.1155708,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    },
+    {
+      "timestamp": 1752522499.1182353,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    }
+  ],
+  "total_usage": 5,
+  "first_usage": 1752519520.910608,
+  "last_usage": 1752522499.1182377,
+  "blocked_count": 0,
+  "override_active": false,
+  "override_expiry": null
+}

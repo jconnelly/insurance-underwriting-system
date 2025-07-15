@@ -1,0 +1,19 @@
+{
+  "created": 1752519520.6342707,
+  "actions": [
+    {
+      "action_type": "override_granted",
+      "identifier": "eef43d68-4dd3-47ae-9955-63837516bad9",
+      "operation_type": "ai_evaluations",
+      "details": {
+        "justification": "Testing override system",
+        "duration_hours": 1,
+        "expiry_time": 1752523162.6233966
+      },
+      "performed_by": "admin",
+      "performed_at": 1752519562.6243134,
+      "success": true,
+      "timestamp_human": "2025-07-14T11:59:22.624313"
+    }
+  ]
+}

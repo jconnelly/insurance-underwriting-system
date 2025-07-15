@@ -1,0 +1,55 @@
+{
+  "id": "f04007bb-213f-4fd8-9fbc-eb1731e27989",
+  "application_date": "2025-07-14 12:52:42.450606",
+  "applicant": {
+    "id": "fd70fa98-f2c2-44e7-a6d3-d1a2f9a797a9",
+    "first_name": "Steven",
+    "last_name": "Thomas",
+    "date_of_birth": "1962-09-10",
+    "gender": "not_specified",
+    "marital_status": "single",
+    "license_number": "J22738247",
+    "license_status": "valid",
+    "license_state": "AZ",
+    "license_issue_date": "1978-09-06",
+    "license_expiration_date": "2027-03-15",
+    "violations": [],
+    "claims": [],
+    "years_licensed": 46
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "d4796e7b-147c-4242-80d8-0d3f009d7572",
+      "year": 2014,
+      "make": "Jaguar",
+      "model": "Model 6",
+      "vin": "C134TY31812MLPTHU",
+      "category": "minivan",
+      "value": "2711",
+      "usage": "personal",
+      "annual_mileage": 22129,
+      "anti_theft_device": false,
+      "safety_rating": 3
+    },
+    {
+      "id": "f00a4c30-c673-4ccc-818f-666efff9a069",
+      "year": 2019,
+      "make": "Chrysler",
+      "model": "Model 6",
+      "vin": "WPBWCALNLNVNMWBG0",
+      "category": "minivan",
+      "value": "13722",
+      "usage": "personal",
+      "annual_mileage": 21326,
+      "anti_theft_device": true,
+      "safety_rating": 3
+    }
+  ],
+  "credit_score": 635,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "USAA",
+  "policy_limit": "1000000",
+  "deductible": "1000"
+}

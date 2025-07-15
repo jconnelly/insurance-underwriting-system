@@ -1,0 +1,61 @@
+{
+  "identifier": "test_user_1",
+  "operation_type": "underwriting_evaluations",
+  "usage_records": [
+    {
+      "timestamp": 1752519594.4256158,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.1440632,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.1471112,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.149068,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.1510298,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.1530921,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    },
+    {
+      "timestamp": 1752519632.1552281,
+      "user_id": null,
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": null
+    }
+  ],
+  "total_usage": 7,
+  "first_usage": 1752519594.425612,
+  "last_usage": 1752519632.1552293,
+  "blocked_count": 0,
+  "override_active": false,
+  "override_expiry": null
+}

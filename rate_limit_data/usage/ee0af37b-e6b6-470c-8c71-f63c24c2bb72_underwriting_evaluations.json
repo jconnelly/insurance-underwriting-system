@@ -1,0 +1,22 @@
+{
+  "identifier": "ee0af37b-e6b6-470c-8c71-f63c24c2bb72",
+  "operation_type": "underwriting_evaluations",
+  "usage_records": [
+    {
+      "timestamp": 1752553812.6053057,
+      "user_id": "de4ab95e-208a-41b1-a1d0-b12d7f740873",
+      "operation_type": "underwriting_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard",
+        "use_ai": true
+      }
+    }
+  ],
+  "total_usage": 1,
+  "first_usage": 1752553812.6053007,
+  "last_usage": 1752553812.60531,
+  "blocked_count": 0,
+  "override_active": false,
+  "override_expiry": null
+}

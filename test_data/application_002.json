@@ -1,0 +1,80 @@
+{
+  "id": "266ec0a8-74d3-4537-a8d1-d1c7372826bf",
+  "application_date": "2025-07-14 12:52:42.448790",
+  "applicant": {
+    "id": "414a2030-a447-4bd0-bc0a-c45eeabd1dc9",
+    "first_name": "Robert",
+    "last_name": "Sanchez",
+    "date_of_birth": "1976-01-26",
+    "gender": "not_specified",
+    "marital_status": "single",
+    "license_number": "L64143555",
+    "license_status": "valid",
+    "license_state": "NC",
+    "license_issue_date": "1992-01-22",
+    "license_expiration_date": "2026-03-11",
+    "violations": [
+      {
+        "id": "380f1daa-7bdb-4e6b-ae33-0512cf316da0",
+        "violation_type": "speeding_10_under",
+        "violation_date": "2021-03-07",
+        "description": "Speeding 10 Under violation",
+        "severity": "minor",
+        "fine_amount": "892",
+        "points": 2,
+        "conviction_date": "2021-04-08"
+      },
+      {
+        "id": "96c2a336-d226-4bc0-9304-2a21e278b903",
+        "violation_type": "improper_turn",
+        "violation_date": "2022-12-18",
+        "description": "Improper Turn violation",
+        "severity": "minor",
+        "fine_amount": "741",
+        "points": 2,
+        "conviction_date": "2023-01-19"
+      }
+    ],
+    "claims": [],
+    "years_licensed": 33
+  },
+  "additional_drivers": [
+    {
+      "id": "1a13df87-f6da-4b97-84d9-0afc8f797684",
+      "first_name": "Jennifer",
+      "last_name": "Garcia",
+      "date_of_birth": "1999-07-30",
+      "gender": "not_specified",
+      "marital_status": "single",
+      "license_number": "I06475908",
+      "license_status": "valid",
+      "license_state": "NJ",
+      "license_issue_date": "2015-07-26",
+      "license_expiration_date": "2028-04-24",
+      "violations": [],
+      "claims": [],
+      "years_licensed": 9
+    }
+  ],
+  "vehicles": [
+    {
+      "id": "ddfb86e9-e918-4896-8815-3cca0dfeefee",
+      "year": 2021,
+      "make": "Hyundai",
+      "model": "Model 8",
+      "vin": "RAUYMSA9CSH09KBXU",
+      "category": "minivan",
+      "value": "15762",
+      "usage": "personal",
+      "annual_mileage": 8870,
+      "anti_theft_device": true,
+      "safety_rating": 3
+    }
+  ],
+  "credit_score": 622,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 0,
+  "previous_carrier": "USAA",
+  "policy_limit": "1000000",
+  "deductible": "500"
+}

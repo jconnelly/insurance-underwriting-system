@@ -1,0 +1,51 @@
+{
+  "created": 1752519520.6338458,
+  "last_updated": 1752519552.5345385,
+  "data": [
+    {
+      "report_type": "daily",
+      "generated_at": 1752519552.5344107,
+      "generated_at_human": "2025-07-14T11:59:12.534411",
+      "operation_type_filter": null,
+      "statistics": {
+        "period_hours": 24,
+        "operation_type_filter": null,
+        "summary": {
+          "total_requests": 2,
+          "total_blocked": 0,
+          "success_rate_percent": 100.0,
+          "block_rate_percent": 0.0,
+          "request_rate_per_hour": 0.08333333333333333
+        },
+        "breakdown": {
+          "unique_identifiers": 1,
+          "operation_types": {
+            "ai_evaluations": 1,
+            "underwriting_evaluations": 1
+          },
+          "top_users": {
+            "eef43d68-4dd3-47ae-9955-63837516bad9": 2
+          },
+          "hourly_distribution": {
+            "2025-07-14 11:00": 2
+          },
+          "daily_distribution": {
+            "2025-07-14": 2
+          }
+        }
+      },
+      "alerts": {
+        "total": 0,
+        "by_severity": {},
+        "recent": []
+      },
+      "insights": [
+        "Excellent success rate of 100.0%, rate limits are well-configured",
+        "Top user (eef43d68-4dd3-47ae-9955-63837516bad9) accounts for 100.0% of usage"
+      ],
+      "recommendations": [
+        "Consider implementing time-based rate limiting for peak hours: ['2025-07-14 11:00']"
+      ]
+    }
+  ]
+}

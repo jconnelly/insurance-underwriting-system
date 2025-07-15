@@ -1,0 +1,57 @@
+{
+  "identifier": "eef43d68-4dd3-47ae-9955-63837516bad9",
+  "operation_type": "ai_evaluations",
+  "usage_records": [
+    {
+      "timestamp": 1752519520.912293,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    },
+    {
+      "timestamp": 1752522100.3770857,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    },
+    {
+      "timestamp": 1752522241.9896472,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    },
+    {
+      "timestamp": 1752522274.1175616,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    },
+    {
+      "timestamp": 1752522499.1201437,
+      "user_id": "97b39a49-8b78-4da9-a7dc-20d5f83dc377",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    }
+  ],
+  "total_usage": 5,
+  "first_usage": 1752519520.9122896,
+  "last_usage": 1752522499.1201456,
+  "blocked_count": 0,
+  "override_active": true,
+  "override_expiry": 1752523162.6233966
+}

@@ -1,0 +1,21 @@
+{
+  "identifier": "fdd020bd-7ad0-4598-bcae-5b8bb23f2375",
+  "operation_type": "ai_evaluations",
+  "usage_records": [
+    {
+      "timestamp": 1752553695.3167982,
+      "user_id": "f4415921-90d6-4458-8c2f-10e4b9d7f696",
+      "operation_type": "ai_evaluations",
+      "resource_consumed": 1,
+      "metadata": {
+        "rule_set": "standard"
+      }
+    }
+  ],
+  "total_usage": 1,
+  "first_usage": 1752553695.3167946,
+  "last_usage": 1752553695.316801,
+  "blocked_count": 0,
+  "override_active": false,
+  "override_expiry": null
+}

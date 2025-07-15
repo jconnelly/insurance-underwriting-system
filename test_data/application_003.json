@@ -1,0 +1,53 @@
+{
+  "id": "086ff52c-43e1-4d20-9834-8715bc369bb4",
+  "application_date": "2025-07-14 12:52:42.449501",
+  "applicant": {
+    "id": "e3f3f079-dc10-42de-a4b3-afbfc4881e62",
+    "first_name": "Daniel",
+    "last_name": "Martinez",
+    "date_of_birth": "2004-02-28",
+    "gender": "not_specified",
+    "marital_status": "single",
+    "license_number": "K87348400",
+    "license_status": "valid",
+    "license_state": "VT",
+    "license_issue_date": "2020-02-24",
+    "license_expiration_date": "2025-12-11",
+    "violations": [
+      {
+        "id": "5a0908f8-ccfc-4261-b072-40943cce8f15",
+        "violation_type": "speeding_10_under",
+        "violation_date": "2023-11-26",
+        "description": "Speeding 10 Under violation",
+        "severity": "minor",
+        "fine_amount": "297",
+        "points": 1,
+        "conviction_date": "2024-01-22"
+      }
+    ],
+    "claims": [],
+    "years_licensed": 5
+  },
+  "additional_drivers": [],
+  "vehicles": [
+    {
+      "id": "fe5b5dcd-fe8b-40ec-ad39-00ca1f8208f3",
+      "year": 2023,
+      "make": "BMW",
+      "model": "3 Series",
+      "vin": "2NZ01LBKBCE3N1GZN",
+      "category": "performance",
+      "value": "66263",
+      "usage": "personal",
+      "annual_mileage": 15227,
+      "anti_theft_device": true,
+      "safety_rating": 3
+    }
+  ],
+  "credit_score": 675,
+  "fraud_conviction": false,
+  "coverage_lapse_days": 1,
+  "previous_carrier": "Travelers",
+  "policy_limit": "1000000",
+  "deductible": "2000"
+}
