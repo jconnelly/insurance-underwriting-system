@@ -157,6 +157,47 @@ Check field mappings in `forms.py` match model definitions in `models.py`.
 - Include progress indicators for long operations
 - Handle errors gracefully with st.error()
 
+## Streamlit Community Cloud Deployment 🚀
+
+### Deployment Options
+
+#### **Option 1: Minimal Deployment (Recommended)**
+- **Main file**: `streamlit_cloud_main.py`
+- **Requirements**: `requirements-minimal.txt`
+- **Features**: Rules-based underwriting, basic UI, core analytics
+- **Memory**: ~200MB (fits Streamlit Cloud limits)
+
+#### **Option 2: Standard Deployment**
+- **Main file**: `streamlit_cloud_main.py`
+- **Requirements**: `requirements-streamlit.txt`
+- **Features**: Enhanced UI, plotly charts, full analytics
+- **Memory**: ~400MB (may hit limits)
+
+#### **Option 3: Full Deployment (Local/High-Memory)**
+- **Main file**: `streamlit_main.py`
+- **Requirements**: `requirements.txt`
+- **Features**: All AI features, LangSmith tracing, full functionality
+- **Memory**: ~800MB+ (requires local deployment or high-memory hosting)
+
+### Deployment Steps
+
+1. **Choose deployment option** based on available resources
+2. **Set main file** in Streamlit Community Cloud settings
+3. **Add environment variables** (optional):
+   ```
+   OPENAI_API_KEY=your_key_here
+   LANGSMITH_API_KEY=your_key_here
+   LANGCHAIN_TRACING_V2=true
+   ```
+4. **Deploy and test** - the app will show which features are available
+
+### Troubleshooting
+
+- **Memory errors**: Use `requirements-minimal.txt`
+- **Connection refused**: App failed to start - check logs for dependency issues
+- **Missing features**: Add environment variables for AI functionality
+- **Performance issues**: Consider upgrading to `requirements-streamlit.txt`
+
 ## Next Steps / TODO
 - [ ] Add user authentication
 - [ ] Implement policy generation
