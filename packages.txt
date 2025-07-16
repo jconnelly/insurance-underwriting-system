@@ -1,0 +1,13 @@
+# System packages for Streamlit Community Cloud
+# These are installed via apt-get
+
+# For numerical computing (if needed)
+# libopenblas-dev
+# liblapack-dev
+
+# For potential SSL issues
+# ca-certificates
+
+# For better performance
+# python3-dev
+# build-essential
