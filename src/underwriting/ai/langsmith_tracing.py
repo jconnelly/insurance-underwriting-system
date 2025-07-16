@@ -343,7 +343,7 @@ class LangSmithTracer:
         """Get the current LangSmith run ID."""
         try:
             # Try to get run ID from current context
-            from langsmith.run_trees import get_current_run_tree
+            from langsmith.run_helpers import get_current_run_tree
             
             current_run = get_current_run_tree()
             if current_run and hasattr(current_run, 'id'):

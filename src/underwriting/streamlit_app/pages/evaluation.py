@@ -328,6 +328,15 @@ def display_evaluation_results(result: dict):
         if additional_notes:
             st.markdown(f"**Additional Notes:** {additional_notes}")
     
+    # LangSmith Trace Information (if available)
+    if result.get("ai_decision"):
+        ai_decision = result["ai_decision"]
+        if hasattr(ai_decision, 'langsmith_run_url') and ai_decision.langsmith_run_url:
+            st.markdown("---")
+            st.markdown("### 🔗 LangSmith Trace")
+            st.markdown(f"**Run ID:** `{ai_decision.langsmith_run_id}`")
+            st.markdown(f"[🔗 View Full Trace in LangSmith]({ai_decision.langsmith_run_url})")
+    
     # AI Decision comparison (if available)
     if result.get("ai_decision") and result["evaluation_mode"] == "AI-Enhanced (Recommended)":
         st.markdown("### 🤖 AI vs Rules Comparison")
@@ -347,6 +356,12 @@ def display_evaluation_results(result: dict):
             st.markdown(f"{ai_color} {ai_decision.decision.value}")
             st.markdown(f"Confidence: {ai_decision.confidence_level.value.title()}")
             st.markdown(f"Reasoning: {ai_decision.reasoning[:100]}...")
+            
+            # Add LangSmith trace link if available
+            if hasattr(ai_decision, 'langsmith_run_url') and ai_decision.langsmith_run_url:
+                st.markdown(f"🔗 [View LangSmith Trace]({ai_decision.langsmith_run_url})")
+            elif hasattr(ai_decision, 'langsmith_run_id') and ai_decision.langsmith_run_id:
+                st.markdown(f"**Run ID:** `{ai_decision.langsmith_run_id}`")
         
         with col2:
             st.markdown("**📏 Rules Decision**")

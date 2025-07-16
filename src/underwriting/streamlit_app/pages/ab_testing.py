@@ -675,9 +675,29 @@ def generate_mock_ab_test_results(test_id: str) -> Dict[str, Any]:
     control_decisions = np.random.choice(['ACCEPT', 'DENY', 'ADJUDICATE'], 500, p=[0.6, 0.25, 0.15])
     treatment_decisions = np.random.choice(['ACCEPT', 'DENY', 'ADJUDICATE'], 500, p=[0.65, 0.2, 0.15])
     
+    # Generate mock LangSmith trace data for AI-enhanced tests
+    langsmith_traces = None
+    if "ai" in test_id.lower():
+        langsmith_traces = {
+            'control_traces': [
+                {
+                    'run_id': f"ctrl_{i}_7f2d4e5a-1b3c-4d5e-6f7g-8h9i0j1k2l3m",
+                    'run_url': f"https://smith.langchain.com/public/ctrl_{i}_7f2d4e5a-1b3c-4d5e-6f7g-8h9i0j1k2l3m/r"
+                }
+                for i in range(min(10, len(control_scores)))  # Show first 10 traces
+            ],
+            'treatment_traces': [
+                {
+                    'run_id': f"trt_{i}_9a1b2c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p",
+                    'run_url': f"https://smith.langchain.com/public/trt_{i}_9a1b2c3d-4e5f-6g7h-8i9j-0k1l2m3n4o5p/r"
+                }
+                for i in range(min(10, len(treatment_scores)))  # Show first 10 traces
+            ]
+        }
+    
     return {
         'test_id': test_id,
-        'name': 'Conservative vs Standard Rule Set',
+        'name': 'Conservative vs Standard Rule Set' if "conservative" in test_id else 'AI Enhanced vs Rules Only',
         'status': 'Completed',
         'control_data': {
             'scores': control_scores,
@@ -707,7 +727,8 @@ def generate_mock_ab_test_results(test_id: str) -> Dict[str, Any]:
             'Treatment variant shows significantly higher acceptance rate',
             'Average risk score increased by 2.9 points',
             'No significant change in adjudication rate'
-        ]
+        ],
+        'langsmith_traces': langsmith_traces
     }
 
 def display_ab_test_results(results_data: Dict[str, Any]):
@@ -786,6 +807,38 @@ def display_ab_test_results(results_data: Dict[str, Any]):
     st.markdown("#### 💡 Conclusions")
     for conclusion in results_data['conclusions']:
         st.markdown(f"• {conclusion}")
+    
+    # LangSmith Trace Information (if available)
+    if results_data.get('langsmith_traces'):
+        st.markdown("#### 🔗 LangSmith Trace Analysis")
+        
+        traces = results_data['langsmith_traces']
+        
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.markdown("**🔵 Control Variant Traces**")
+            if traces.get('control_traces'):
+                for i, trace in enumerate(traces['control_traces'][:5]):  # Show first 5
+                    st.markdown(f"• [Trace {i+1}]({trace['run_url']}) - ID: `{trace['run_id'][:12]}...`")
+                
+                if len(traces['control_traces']) > 5:
+                    st.markdown(f"... and {len(traces['control_traces']) - 5} more traces")
+            else:
+                st.markdown("*No control traces available*")
+        
+        with col2:
+            st.markdown("**🟢 Treatment Variant Traces**")
+            if traces.get('treatment_traces'):
+                for i, trace in enumerate(traces['treatment_traces'][:5]):  # Show first 5
+                    st.markdown(f"• [Trace {i+1}]({trace['run_url']}) - ID: `{trace['run_id'][:12]}...`")
+                
+                if len(traces['treatment_traces']) > 5:
+                    st.markdown(f"... and {len(traces['treatment_traces']) - 5} more traces")
+            else:
+                st.markdown("*No treatment traces available*")
+        
+        st.markdown("*Click on trace links to view detailed AI decision-making process in LangSmith*")
     
     # Export options
     st.markdown("#### 💾 Export Results")
