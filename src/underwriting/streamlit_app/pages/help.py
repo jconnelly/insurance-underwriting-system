@@ -15,6 +15,7 @@ def show_help_page():
     st.markdown("""
     Welcome to the Insurance Underwriting System documentation. 
     Find guides, tutorials, and support information below.
+    This portfolio project and site is created and maintained by [Jeremiah Connelly](https://jeremiahconnelly.dev).
     """)
     
     # Main tabs

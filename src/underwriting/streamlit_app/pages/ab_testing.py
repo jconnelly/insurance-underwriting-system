@@ -32,6 +32,7 @@ def show_ab_testing_page():
     st.markdown("""
     Create, manage, and analyze A/B tests to optimize underwriting performance.
     Compare different rule sets, AI configurations, and processing approaches.
+    This portfolio project and site is created and maintained by [Jeremiah Connelly](https://jeremiahconnelly.dev).
     """)
     
     # Initialize session state

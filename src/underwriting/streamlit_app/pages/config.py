@@ -19,6 +19,7 @@ def show_config_page():
     st.markdown("""
     Manage system configurations, rule sets, AI model parameters, 
     and operational settings for the underwriting system.
+    This portfolio project and site is created and maintained by [Jeremiah Connelly](https://jeremiahconnelly.dev).
     """)
     
     # Main tabs

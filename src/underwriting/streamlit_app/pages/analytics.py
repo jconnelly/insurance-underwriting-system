@@ -33,6 +33,7 @@ def show_analytics_page():
     st.markdown("""
     Comprehensive analytics and insights for underwriting performance, 
     trends, and optimization opportunities.
+    This portfolio project and site is created and maintained by [Jeremiah Connelly](https://jeremiahconnelly.dev).
     """)
     
     # Time period selector
@@ -1015,7 +1016,7 @@ def generate_day_of_week_data() -> pd.DataFrame:
 def generate_monthly_trend_data() -> Dict[str, List]:
     """Generate monthly trend data with forecast."""
     
-    months = pd.date_range(start='2024-01-01', periods=15, freq='M')
+    months = pd.date_range(start='2024-01-01', periods=15, freq='ME')
     applications = list(np.random.poisson(1500, 12)) + [0, 0, 0]  # 12 historical + 3 forecast
     forecast = [0] * 12 + list(np.random.poisson(1600, 3))  # forecast for next 3 months
     

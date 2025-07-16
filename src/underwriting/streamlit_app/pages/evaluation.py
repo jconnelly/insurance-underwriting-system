@@ -31,7 +31,8 @@ def show_evaluation_page():
     st.markdown("## 📝 Application Evaluation")
     st.markdown("""
     Use this form to enter application details and get an AI-enhanced underwriting decision.
-    All fields marked with * are required.
+    All fields marked with * are required. 
+    This portfolio project and site is created and maintained by [Jeremiah Connelly](https://jeremiahconnelly.dev).
     """)
     
     # Initialize session state
