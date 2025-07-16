@@ -73,7 +73,26 @@ All dependencies are in `requirements.txt` and are installed.
 - **Type Safety**: Added decision type checking in display functions
 - **Unicode Issues**: Replaced problematic characters (⚪ → O)
 
-### 2. Form Component Updates
+### 2. LangSmith Trace Integration ✅
+- **LangSmith Run ID Fix**: Fixed import path for `get_current_run_tree`
+  - Changed from `langsmith.run_trees` to `langsmith.run_helpers`
+  - Run IDs now captured successfully in logs
+
+- **Evaluation Page Traces**: Added clickable LangSmith trace links
+  - AI vs Rules comparison section shows trace links
+  - Dedicated LangSmith trace section in main results
+  - Conditional display based on trace availability
+
+- **A/B Testing Page Traces**: Enhanced with trace analysis
+  - Mock data includes LangSmith trace information for AI tests
+  - "🔗 LangSmith Trace Analysis" section shows control vs treatment traces
+  - Displays first 5 traces with clickable links and Run IDs
+
+- **User Experience**: Direct access to AI decision-making process
+  - Click trace links to view detailed prompts, responses, and reasoning
+  - Improved transparency in AI-driven underwriting decisions
+
+### 3. Form Component Updates
 - Enhanced metadata collection with proper field types
 - Added conditional previous carrier input
 - Improved validation and error handling
