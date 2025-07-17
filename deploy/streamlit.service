@@ -1,0 +1,51 @@
+[Unit]
+Description=Insurance Underwriting System - Streamlit Application
+After=network.target
+Documentation=https://github.com/jconnelly/insurance-underwriting-system
+
+[Service]
+Type=simple
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/opt/insurance-underwriting-system
+Environment=PATH=/opt/insurance-underwriting-system/venv/bin
+Environment=PYTHONPATH=/opt/insurance-underwriting-system/src
+EnvironmentFile=-/opt/insurance-underwriting-system/.env
+
+# Start command
+ExecStart=/opt/insurance-underwriting-system/venv/bin/streamlit run streamlit_main.py \
+    --server.port=8501 \
+    --server.address=0.0.0.0 \
+    --server.headless=true \
+    --browser.gatherUsageStats=false
+
+# Restart configuration
+Restart=always
+RestartSec=10
+StartLimitInterval=300
+StartLimitBurst=3
+
+# Process management
+KillMode=mixed
+KillSignal=SIGTERM
+TimeoutStopSec=30
+
+# Security settings
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ReadWritePaths=/opt/insurance-underwriting-system/logs
+ReadWritePaths=/opt/insurance-underwriting-system/rate_limit_data
+ReadWritePaths=/opt/insurance-underwriting-system/data
+
+# Resource limits
+LimitNOFILE=65536
+LimitNPROC=4096
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=insurance-underwriting
+
+[Install]
+WantedBy=multi-user.target
